@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CA1CB008-2B96-4732-A14A-A53AFE3BD480}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>StatisticalAnalysis.Service</RootNamespace>
+    <AssemblyName>StatisticalAnalysis.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="SqlServerDataAdapter">
+      <HintPath>..\..\Lib\SqlServerDataAdapter.dll</HintPath>
+    </Reference>
+    <Reference Include="StatisticalReport.Infrastructure">
+      <HintPath>..\..\Lib\StatisticalReport.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="StatisticalReport.Service">
+      <HintPath>..\..\Lib\StatisticalReport.Service.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CementCostAnalysis\CementCostAnalysisService.cs" />
+    <Compile Include="CementCostAnalysis\CementCostFSTAnalysisTableHelper.cs" />
+    <Compile Include="CoalCostAnalysis\CoalConsumptionAnalysisService.cs" />
+    <Compile Include="DowntimeAnalysis\DowntimeComprehensiveAnalysisService.cs" />
+    <Compile Include="DowntimeAnalysis\DowntimeCountAnalysisService.cs" />
+    <Compile Include="ElectricityCostAnalysis\ElectricityConsumptionAnalysisService.cs" />
+    <Compile Include="ElectricityCostAnalysis\ElectricityPVFUsageAnalysisService.cs" />
+    <Compile Include="EnergyAlarmAnalysis\AlarmComprehensiveAnalysisService.cs" />
+    <Compile Include="EnergyAlarmAnalysis\AlarmCountAnalysisService.cs" />
+    <Compile Include="HistoryTrend\HorizontalAnalysisService.cs" />
+    <Compile Include="HistoryTrend\ProcessService.cs" />
+    <Compile Include="PlanAndActual\CementTargetCompletion.cs" />
+    <Compile Include="PlanAndActual\PlanAndTargetCompletionService.cs" />
+    <Compile Include="PlanAndActual\TargetCompletion.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StatisticalAnalysis.Infrastruture\StatisticalAnalysis.Infrastruture.csproj">
+      <Project>{bb3d0f7b-08df-4903-a9c7-814443a4b4e1}</Project>
+      <Name>StatisticalAnalysis.Infrastruture</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
