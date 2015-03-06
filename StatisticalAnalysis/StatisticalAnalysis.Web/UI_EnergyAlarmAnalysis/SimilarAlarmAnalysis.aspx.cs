@@ -22,7 +22,7 @@ namespace StatisticalAnalysis.Web.UI_EnergyAlarmAnalysis
 #endif
                 this.OrganisationTree_ProductionLine.Organizations = GetDataValidIdGroup("ProductionOrganization");                 //向web用户控件传递数据授权参数
                 this.OrganisationTree_ProductionLine.PageName = "AlarmCountAnalysis.aspx";                                     //向web用户控件传递当前调用的页面名称
-
+                
             }
         }
     }
