@@ -1,5 +1,5 @@
 ﻿var IsFirstLoadChart = "true";
-
+var windowID = '';
 $(document).ready(function () {
 
     // 为分析类型挂载change事件
@@ -36,6 +36,8 @@ function onOrganisationTreeClick(node) {
 }
 
 function query() {
+    $('#' + windowID).empty();
+
     var organizationId = $('#organizationId').val();
 
     if (organizationId == '') {
@@ -139,6 +141,7 @@ function GetWindowPostion(myWindowIndex, myWindowContainerId) {
 function WindowsDialogOpen(myData, myContainerId, myIsShowGrid, myChartType, myWidth, myHeight, myLeft, myTop, myDraggable, myMaximizable, myMaximized) {
     ;
     var m_WindowId = OpenWindows(myContainerId, '数据分析', myWidth, myHeight, myLeft, myTop, myDraggable, myMaximizable, myMaximized); //弹出windows
+    windowID = m_WindowId;
     var m_WindowObj = $('#' + m_WindowId);
     if (myMaximized != true) {
         CreateGridChart(myData, m_WindowId, myIsShowGrid, myChartType);               //生成图表
@@ -163,4 +166,12 @@ function WindowsDialogOpen(myData, myContainerId, myIsShowGrid, myChartType, myW
             CreateGridChart(myData, m_WindowId, myIsShowGrid, myChartType);
         }
     });
+}
+//将chart转化为图片
+function chartToImage() {
+    //alert("");
+
+    var j = $('#' + windowID + '_Chart').jqplotToImageElem();
+    $('#' + windowID + '_Chart').empty();
+    $('#' + windowID + '_Chart').append(j);
 }

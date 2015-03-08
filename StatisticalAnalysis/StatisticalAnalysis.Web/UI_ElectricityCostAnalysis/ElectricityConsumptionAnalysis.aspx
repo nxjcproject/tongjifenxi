@@ -98,6 +98,7 @@
                             </td>
                             <td style="width:10px;">|</td>
                             <td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-chart_curve'" onclick="Query();">分析</a></td>
+                            <td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-picture_save'" onclick="chartToImage();">生产图片</a></td>
                         </tr>
                     </table>
                 </div>

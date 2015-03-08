@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>报警次数分析</title>
+    <title>能源计划实际</title>
     <link rel="stylesheet" type="text/css" href="/lib/ealib/themes/gray/easyui.css" />
     <link rel="stylesheet" type="text/css" href="/lib/ealib/themes/icon.css" />
     <link rel="stylesheet" type="text/css" href="/lib/extlib/themes/syExtIcon.css" />
@@ -70,6 +70,7 @@
                         <option value="Bar">柱状图</option>
                     </select>
                     <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-chart_curve'" onclick="Query();">分析</a>
+                    <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-picture_save'" onclick="chartToImage();">生产图片</a>
                 </div>
                 <!-- 工具栏结束 -->
                 <!-- 图表开始 -->
