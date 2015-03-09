@@ -57,6 +57,7 @@
     <Compile Include="DowntimeAnalysis\DowntimeComprehensiveAnalysisService.cs" />
     <Compile Include="DowntimeAnalysis\DowntimeCountAnalysisService.cs" />
     <Compile Include="ElectricityCostAnalysis\ElectricityConsumptionAnalysisService.cs" />
+    <Compile Include="ElectricityCostAnalysis\ElectricityABCDAnalysisService.cs" />
     <Compile Include="ElectricityCostAnalysis\ElectricityPVFUsageAnalysisService.cs" />
     <Compile Include="EnergyAlarmAnalysis\AlarmComprehensiveAnalysisService.cs" />
     <Compile Include="EnergyAlarmAnalysis\AlarmCountAnalysisService.cs" />

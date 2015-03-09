@@ -1605,7 +1605,9 @@
     <Content Include="UI_ElectricityCostAnalysis\css\page\ElectricityPVFAnalysis.css" />
     <Content Include="UI_ElectricityCostAnalysis\css\page\ElectricityConsumptionAnalysis.css" />
     <Content Include="UI_ElectricityCostAnalysis\ElectricityConsumptionAnalysis.aspx" />
+    <Content Include="UI_ElectricityCostAnalysis\ElectricityABCDAnalysis.aspx" />
     <Content Include="UI_ElectricityCostAnalysis\ElectricityPVFAnalysis.aspx" />
+    <Content Include="UI_ElectricityCostAnalysis\js\page\ElectricityABCDAnalysis.js" />
     <Content Include="UI_ElectricityCostAnalysis\js\page\ElectricityPVFAnalysis.js" />
     <Content Include="UI_ElectricityCostAnalysis\js\page\ElectricityConsumptionAnalysis.js" />
     <Content Include="UI_EnergyAlarmAnalysis\AlarmCountAnalysis.aspx" />
@@ -1672,6 +1674,13 @@
     <Compile Include="UI_ElectricityCostAnalysis\ElectricityConsumptionAnalysis.aspx.designer.cs">
       <DependentUpon>ElectricityConsumptionAnalysis.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UI_ElectricityCostAnalysis\ElectricityABCDAnalysis.aspx.cs">
+      <DependentUpon>ElectricityABCDAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI_ElectricityCostAnalysis\ElectricityABCDAnalysis.aspx.designer.cs">
+      <DependentUpon>ElectricityABCDAnalysis.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UI_ElectricityCostAnalysis\ElectricityPVFAnalysis.aspx.cs">
       <DependentUpon>ElectricityPVFAnalysis.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1727,6 +1736,7 @@
     <Folder Include="images\common\" />
     <Folder Include="images\page\" />
     <Folder Include="js\page\" />
+    <Folder Include="UI_\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="lib\pllib\syntaxhighlighter\LGPL-LICENSE" />

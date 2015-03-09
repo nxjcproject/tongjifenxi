@@ -37,7 +37,7 @@ function onOrganisationTreeClick(node) {
     // 更新该产线可用电耗变量
     $.ajax({
         type: "POST",
-        url: "ElectricityConsumptionAnalysis.aspx/GetElectricityConsumptionVariableByOrganizationIdWithComoboboxFormat",
+        url: "ElectricityABCDAnalysis.aspx/GetElectricityConsumptionVariableByOrganizationIdWithComoboboxFormat",
         data: "{organizationId:'" + node.OrganizationId + "'}",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -74,7 +74,7 @@ function Query() {
 
     $.ajax({
         type: "POST",
-        url: "ElectricityConsumptionAnalysis.aspx/GetElectricityConsumptionAnalysisChart",
+        url: "ElectricityABCDAnalysis.aspx/GetABCDElectricityConsumptionAnalysisChart",
         data: "{organizationId:'" + organizationId + "',variableId:'" + variableId + "',analysisType:'" + analysisType + "',startTime:'" + startTime + "',endTime:'" + endTime + "'}",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -190,6 +190,8 @@ function WindowsDialogOpen(myData, myContainerId, myIsShowGrid, myChartType, myW
 }
 //将chart转化为图片
 function chartToImage(){
+    //alert("");
+
     var j = $('#' + windowID + '_Chart').jqplotToImageElem();
     $('#' + windowID + '_Chart').empty();
     $('#' + windowID + '_Chart').append(j);

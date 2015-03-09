@@ -168,7 +168,7 @@ function WindowsDialogOpen(myData, myContainerId, myIsShowGrid, myChartType, myW
     });
 }
 //将chart转化为图片
-function chartToImage() {
+function chartToImage(){
     //alert("");
 
     var j = $('#' + windowID + '_Chart').jqplotToImageElem();

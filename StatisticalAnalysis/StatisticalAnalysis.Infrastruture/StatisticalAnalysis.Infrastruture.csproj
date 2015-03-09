@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Configuration\ConnectionStringFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\ABCDAnalysisTableHelper.cs" />
     <Compile Include="Utility\TempAnalysisTableHelper.cs" />
     <Compile Include="Utility\AnalysisTableHelper\StatisticalCycle.cs">
       <SubType>Code</SubType>

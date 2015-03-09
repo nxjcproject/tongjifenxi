@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace StatisticalAnalysis.Web.UI_ElectricityCostAnalysis
 {
-    public partial class ElectricityConsumptionAnalysis : WebStyleBaseForEnergy.webStyleBase
+    public partial class ElectricityABCDAnalysis : WebStyleBaseForEnergy.webStyleBase
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -32,13 +32,13 @@ namespace StatisticalAnalysis.Web.UI_ElectricityCostAnalysis
         [WebMethod]
         public static string GetElectricityConsumptionVariableByOrganizationIdWithComoboboxFormat(string organizationId)
         {
-            DataTable dt = ElectricityConsumptionAnalysisService.GetElectricityConsumptionVariableByOrganizationId(organizationId);
+            DataTable dt = ElectricityABCDAnalysisService.GetElectricityConsumptionVariableByOrganizationId(organizationId);
 
             return EasyUIJsonParser.ComboboxJsonParser.DataTableToJson(dt);
         }
 
         [WebMethod]
-        public static string GetElectricityConsumptionAnalysisChart(string organizationId, string variableId, string analysisType, string startTime, string endTime)
+        public static string GetABCDElectricityConsumptionAnalysisChart(string organizationId, string variableId, string analysisType, string startTime, string endTime)
         {
             DateTime begin = DateTime.Parse(startTime);
             DateTime end = DateTime.Parse(endTime);
@@ -50,15 +50,15 @@ namespace StatisticalAnalysis.Web.UI_ElectricityCostAnalysis
             {
                 case "yearly":
                     xaxisLabel = "月";
-                    electricityConsumptionTable = ElectricityConsumptionAnalysisService.GetElectricityPVFUsageYearly(organizationId, variableId, end.Year);
+                    electricityConsumptionTable = ElectricityABCDAnalysisService.GetABCDElectricityConsumptionYearly(organizationId, variableId, end.Year);
                     break;
                 case "monthly":
                     xaxisLabel = "月-日";
-                    electricityConsumptionTable = ElectricityConsumptionAnalysisService.GetElectricityPVFUsageMonthly(organizationId, variableId, end.Year, end.Month);
+                    electricityConsumptionTable = ElectricityABCDAnalysisService.GetABCDElectricityConsumptionMonthly(organizationId, variableId, end.Year, end.Month);
                     break;
                 case "custom":
                     xaxisLabel = "年-月-日";
-                    electricityConsumptionTable = ElectricityConsumptionAnalysisService.GetElectricityPVFUsageCustom(organizationId, variableId, begin, end);
+                    electricityConsumptionTable = ElectricityABCDAnalysisService.GetABCDElectricityConsumptionCustom(organizationId, variableId, begin, end);
                     break;
                 default:
                     break;
@@ -70,7 +70,7 @@ namespace StatisticalAnalysis.Web.UI_ElectricityCostAnalysis
                 colNames.Add(dc.ColumnName.ToString());
             }
 
-            string json = EasyUIJsonParser.ChartJsonParser.GetGridChartJsonString(electricityConsumptionTable, colNames.ToArray(), new string[] { "甲班电耗", "乙班电耗", "丙班电耗" }, xaxisLabel, "kW·h/t", 1);
+            string json = EasyUIJsonParser.ChartJsonParser.GetGridChartJsonString(electricityConsumptionTable, colNames.ToArray(), new string[] { "A班电耗", "B班电耗", "C班电耗", "D班电耗" }, xaxisLabel, "kW·h/t", 1);
 
             return json;
         }
