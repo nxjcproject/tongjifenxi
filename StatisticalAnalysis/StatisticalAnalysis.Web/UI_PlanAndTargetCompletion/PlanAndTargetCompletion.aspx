@@ -70,7 +70,7 @@
                         <option value="Bar">柱状图</option>
                     </select>
                     <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-chart_curve'" onclick="Query();">分析</a>
-                    <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-picture_save'" onclick="chartToImage();">生产图片</a>
+                    <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-picture_save'" onclick="chartToImage();">生成图片</a>
                 </div>
                 <!-- 工具栏结束 -->
                 <!-- 图表开始 -->
