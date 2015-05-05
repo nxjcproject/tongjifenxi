@@ -155,7 +155,7 @@ namespace StatisticalAnalysis.Infrastruture.Utility
                 drA[columnName] = (decimal)source.Rows[i]["A班"];
                 drB[columnName] = (decimal)source.Rows[i]["B班"];
                 drC[columnName] = (decimal)source.Rows[i]["C班"];
-                drD[columnName] = (decimal)source.Rows[i]["C班"];
+                drD[columnName] = (decimal)source.Rows[i]["D班"];
             }
 
             destination.Rows.Add(drA);
