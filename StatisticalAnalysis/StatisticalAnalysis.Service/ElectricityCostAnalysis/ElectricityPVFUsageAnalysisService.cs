@@ -78,14 +78,15 @@ namespace StatisticalAnalysis.Service.ElectricityCostAnalysis
             ISqlServerDataFactory dataFactory = new SqlServerDataFactory(connectionString);
 
             string queryString = @"SELECT [C].*, [A].[TimeStamp]
-                                     FROM [balance_Energy] AS [C] INNER JOIN
-                                          [balance_Energy_Template] AS [B] ON [C].[VariableId] = [B].[VariableId] INNER JOIN
-                                          [tz_Balance] AS [A] ON [C].[KeyId] = [A].[BalanceId]
-                                    WHERE ([B].[TemplateType] = 'ProductionLine') AND 
-                                          ([C].[OrganizationID] = @organizationId) AND 
-				                          ([A].[StaticsCycle] = 'day') AND 
-                                          ([A].[TimeStamp] >= @startTime) AND
-                                          ([A].[TimeStamp] <= @endTime)
+                                        FROM [balance_Energy] AS [C] , 
+                                            [tz_Balance] AS [A] 
+                                        WHERE 
+                                        [C].[KeyId] = [A].[BalanceId]
+                                            AND([C].[OrganizationID] = @organizationId) 
+	                                        AND ([A].[StaticsCycle] = 'day') 	
+                                            AND([A].[TimeStamp] >= @startTime) 
+                                            AND([A].[TimeStamp] <= @endTime)	
+	                                        AND([C].[VariableId]='clinker_ElectricityQuantity' OR [C].[VariableId]='cementmill_ElectricityQuantity')
                                 ";
 
             SqlParameter[] parameters = new SqlParameter[]{
