@@ -117,8 +117,8 @@ namespace StatisticalAnalysis.Service.CoalCostAnalysis
 
             SqlParameter[] parameters = new SqlParameter[]{
                 new SqlParameter("organizationId", organiztionId),
-                new SqlParameter("startTime", startTime),
-                new SqlParameter("endTime", endTime)
+                new SqlParameter("startTime", startTime.ToString("yyyy-MM")),
+                new SqlParameter("endTime", endTime.ToString("yyyy-MM"))
             };
 
             return dataFactory.Query(queryString, parameters);

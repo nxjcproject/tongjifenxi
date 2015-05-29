@@ -64,7 +64,7 @@ namespace StatisticalAnalysis.Infrastruture.Utility
 
             for (int i = 0; i < source.Rows.Count; i++)
             {
-                string columnName = DateTime.Parse(source.Rows[i]["TimeStamp"].ToString()).ToString("MM-dd");
+                string columnName = DateTime.Parse(source.Rows[i]["TimeStamp"].ToString()).ToString("MM");
 
                 drA[columnName] = (decimal)source.Rows[i]["A班"];
                 drB[columnName] = (decimal)source.Rows[i]["B班"];

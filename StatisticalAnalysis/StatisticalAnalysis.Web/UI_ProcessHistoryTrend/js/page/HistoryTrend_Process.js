@@ -19,7 +19,9 @@ function onTagItemSelect(item) {
 function initializeDateTimePickers() {
     var m_DateTime = new Date();
     var m_NowStr = m_DateTime.format("yyyy-MM-dd hh:mm:ss");
-    $('#StartTime').datetimebox('setValue', m_NowStr);
+    m_DateTime.setDate(m_DateTime.getDate() - 1);
+    var m_YestedayStr = m_DateTime.format("yyyy-MM-dd hh:mm:ss");
+    $('#StartTime').datetimebox('setValue', m_YestedayStr);
     $('#EndTime').datetimebox('setValue', m_NowStr);
 }
 
@@ -104,8 +106,9 @@ function AddTagItem(tag) {
 
     $('#grid_SelectedObj').datagrid('appendRow', {
         OrganizationID: tag.OrganizationID,
-        LevelCode: tag.LevelCode,
-        Name: tag.Name
+        VariableId: tag.VariableId,
+        Name: tag.Name,
+        LevelType:tag.LevelType
     });
 }
 

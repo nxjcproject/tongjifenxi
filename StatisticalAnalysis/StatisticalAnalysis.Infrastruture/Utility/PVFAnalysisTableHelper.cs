@@ -64,7 +64,7 @@ namespace StatisticalAnalysis.Infrastruture.Utility
 
             for (int i = 0; i < source.Rows.Count; i++)
             {
-                string columnName = ((DateTime)source.Rows[i]["TimeStamp"]).ToString("MM");
+                string columnName = (DateTime.Parse(source.Rows[i]["TimeStamp"].ToString())).ToString("MM");
 
                 drPeak[columnName] = (decimal)source.Rows[i]["PeakB"];
                 drValley[columnName] = (decimal)source.Rows[i]["ValleyB"];

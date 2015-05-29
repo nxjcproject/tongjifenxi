@@ -60,53 +60,53 @@ function query() {
     // 获取分析类型
     var analysisType = $("input[name='analysisType']:checked").val();
 
-    switch (analysisType) {
+    //switch (analysisType) {
 
-            // 如果是年分析
-            // 结束时间月日应为年的最后一天
-            // 起始时间月日应为年的1月1号
+    //        // 如果是年分析
+    //        // 结束时间月日应为年的最后一天
+    //        // 起始时间月日应为年的1月1号
 
-        case 'yearly':
-            endTime = new Date(endTime);
-            endTime.setMonth(12 - 1, getLastDayOfMonth(endTime.getFullYear(), 12));
-            endTime.setHours(23, 59, 59, 999);
-            startTime = new Date(endTime.getFullYear(), 0, 1);
-            startTime.setHours(00, 00, 00, 000);
+    //    case 'yearly':
+    //        endTime = new Date(endTime);
+    //        endTime.setMonth(12 - 1, getLastDayOfMonth(endTime.getFullYear(), 12));
+    //        endTime.setHours(23, 59, 59, 999);
+    //        startTime = new Date(endTime.getFullYear(), 0, 1);
+    //        startTime.setHours(00, 00, 00, 000);
 
-            startTime = startTime.toLocaleString();
-            endTime = endTime.toLocaleString();
-            break;
+    //        startTime = startTime.toLocaleString();
+    //        endTime = endTime.toLocaleString();
+    //        break;
 
-            // 如果是月分析
-            // 结束时间月日应为选定月的最后一天
-            // 起始时间月日应为选定月的1号
+    //        // 如果是月分析
+    //        // 结束时间月日应为选定月的最后一天
+    //        // 起始时间月日应为选定月的1号
 
-        case 'monthly':
-            endTime = new Date(endTime);
-            endTime.setDate(getLastDayOfMonth(endTime.getFullYear(), endTime.getMonth() + 1));
-            endTime.setHours(23, 59, 59, 999);
-            startTime = new Date(endTime.getFullYear(), 0, 1);
-            startTime.setHours(00, 00, 00, 000);
+    //    case 'monthly':
+    //        endTime = new Date(endTime);
+    //        endTime.setDate(getLastDayOfMonth(endTime.getFullYear(), endTime.getMonth() + 1));
+    //        endTime.setHours(23, 59, 59, 999);
+    //        startTime = new Date(endTime.getFullYear(), 0, 1);
+    //        startTime.setHours(00, 00, 00, 000);
 
-            startTime = startTime.toLocaleString();
-            endTime = endTime.toLocaleString();
-            break;
+    //        startTime = startTime.toLocaleString();
+    //        endTime = endTime.toLocaleString();
+    //        break;
 
-            // 如果是自定义，则
-            // 开始时间设定为所选时间的凌晨0点0分0秒
-            // 结束时间设定为所选时间的23点59分59秒
+    //        // 如果是自定义，则
+    //        // 开始时间设定为所选时间的凌晨0点0分0秒
+    //        // 结束时间设定为所选时间的23点59分59秒
 
-        case 'custom':
-            endTime = new Date(endTime);
-            startTime = new Date(startTime);
+    //    case 'custom':
+    //        endTime = new Date(endTime);
+    //        startTime = new Date(startTime);
 
-            endTime.setHours(23, 59, 59, 999);
-            startTime.setHours(00, 00, 00, 000);
+    //        endTime.setHours(23, 59, 59, 999);
+    //        startTime.setHours(00, 00, 00, 000);
 
-            startTime = startTime.toLocaleString();
-            endTime = endTime.toLocaleString();
-            break;
-    }
+    //        startTime = startTime.toLocaleString();
+    //        endTime = endTime.toLocaleString();
+    //        break;
+    //}
 
     $.ajax({
         type: "POST",

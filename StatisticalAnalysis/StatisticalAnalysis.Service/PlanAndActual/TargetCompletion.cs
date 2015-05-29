@@ -41,9 +41,9 @@ namespace StatisticalAnalysis.Service.PlanAndActual
             ///////取数部分未完待续---------
             int curMonth = DateTime.Now.Month;
             int year = DateTime.Now.Year;
-            IDictionary<string, string> m_dictionary = new Dictionary<string,string>(); 
-            m_dictionary.Add("吨熟料发电量","cementmill_ElectricityConsumption");///临时
-            m_dictionary.Add("发电量","cementmill_ElectricityConsumption");//临时
+            IDictionary<string, string> m_dictionary = new Dictionary<string,string>();
+            m_dictionary.Add("吨熟料发电量", "clinkerElectricityGeneration_ElectricityConsumption");
+            m_dictionary.Add("发电量", "clinkerElectricityGeneration_ElectricityQuantity");
             m_dictionary.Add("煤磨电耗","coalPreparation_ElectricityConsumption");
             m_dictionary.Add("生料磨电耗","rawMaterialsPreparation_ElectricityConsumption");
             m_dictionary.Add("熟料产量","clinker_ClinkerOutput");
@@ -62,15 +62,14 @@ namespace StatisticalAnalysis.Service.PlanAndActual
                                 ON 
                                 A.[BalanceId]=B.KeyId 
                                 WHERE
-                                MONTH(A.TimeStamp)=@month
-                                AND
-                                YEAR(A.TimeStamp)=@date
+                                A.TimeStamp=@TimeStamp                                
                                 AND
                                 B.OrganizationID=@organizationId
                                 AND
                                 B.VariableId=@variableId";
-                    SqlParameter[] parameters = { new SqlParameter("date", date), new SqlParameter("organizationId", organizationId),
-                                                new SqlParameter("month",i.ToString("00")),new SqlParameter("variableId", m_dictionary[variable])};
+                    string timeStamp = date + '-' + i.ToString("00");
+                    SqlParameter[] parameters = { new SqlParameter("TimeStamp", timeStamp), new SqlParameter("organizationId", organizationId),
+                                                new SqlParameter("variableId", m_dictionary[variable])};
                     DataTable temp= _dataFactory.Query(v_sql, parameters);
 
                     if (temp.Rows.Count == 0)

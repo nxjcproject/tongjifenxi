@@ -99,8 +99,9 @@
                 <thead>
                      <tr>
                         <th data-options="field:'OrganizationID', hidden:true"></th>
-                        <th data-options="field:'LevelCode', hidden:true"></th>
-                        <th data-options="field:'Name'" style="width: 155px;">项目名称</th>
+                        <th data-options="field:'VariableId', hidden:true"></th>
+                        <th data-options="field:'LevelType', hidden:true"></th>
+                        <th data-options="field:'Name'" style="width: 220px;">项目名称</th>
                      </tr>
                 </thead>
             </table>

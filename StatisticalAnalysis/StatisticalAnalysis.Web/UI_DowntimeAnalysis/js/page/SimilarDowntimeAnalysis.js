@@ -47,8 +47,8 @@ function Query() {
         return;
     }
 
-    var startTime = new Date($('#StartTime').datebox('getValue')).toLocaleDateString();
-    var endTime = new Date($('#EndTime').datebox('getValue')).toLocaleDateString();
+    var startTime = $('#StartTime').datebox('getValue');
+    var endTime = $('#EndTime').datebox('getValue');
 
     // 获取停机原因
     var reasonText = $('#downtimeReason').combotree('getText');

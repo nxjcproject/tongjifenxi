@@ -46,6 +46,10 @@
       <HintPath>..\Lib\EasyUIJsonParser.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="StatisticalAnalysis.Infrastruture, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\StatisticalAnalysis.Infrastruture\bin\Debug\StatisticalAnalysis.Infrastruture.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -1736,17 +1740,12 @@
     <Folder Include="images\common\" />
     <Folder Include="images\page\" />
     <Folder Include="js\page\" />
-    <Folder Include="UI_\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="lib\pllib\syntaxhighlighter\LGPL-LICENSE" />
     <Content Include="lib\pllib\syntaxhighlighter\MIT-LICENSE" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StatisticalAnalysis.Infrastruture\StatisticalAnalysis.Infrastruture.csproj">
-      <Project>{bb3d0f7b-08df-4903-a9c7-814443a4b4e1}</Project>
-      <Name>StatisticalAnalysis.Infrastruture</Name>
-    </ProjectReference>
     <ProjectReference Include="..\StatisticalAnalysis.Service\StatisticalAnalysis.Service.csproj">
       <Project>{ca1cb008-2b96-4732-a14a-a53afe3bd480}</Project>
       <Name>StatisticalAnalysis.Service</Name>

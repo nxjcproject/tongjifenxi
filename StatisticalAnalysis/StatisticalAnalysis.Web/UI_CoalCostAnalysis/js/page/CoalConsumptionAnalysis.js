@@ -16,8 +16,8 @@ $(document).ready(function () {
 
     var now = new Date();
     var tenDaysEarly = new Date((now / 1000 - 86400 * 10) * 1000);
-    $('#StartTime').datebox('setValue', tenDaysEarly.toLocaleDateString().replace(/\//g, '-'));
-    $('#EndTime').datebox('setValue', now.toLocaleDateString().replace(/\//g, '-'));
+    $('#StartTime').datebox('setValue', tenDaysEarly.toString().replace(/\//g, '-'));
+    $('#EndTime').datebox('setValue', now.toString().replace(/\//g, '-'));
 });
 
 
@@ -45,8 +45,8 @@ function query() {
         return;
     }
 
-    var startTime = new Date($('#StartTime').datebox('getValue')).toLocaleDateString();
-    var endTime = new Date($('#EndTime').datebox('getValue')).toLocaleDateString();
+    var startTime = $('#StartTime').datebox('getValue');
+    var endTime = $('#EndTime').datebox('getValue');
 
     // 获取分析类型
     var analysisType = $("input[name='analysisType']:checked").val();

@@ -23,7 +23,7 @@ function GetGridObjById(myGridObjContainerId, myData, myTitle) {
     }
     else {
         /////////////////////////////////////////////已经加载过一次////////////////////////////////
-        GridObjArray[m_ExistsIndex].datagrid('loadData', myData);
+        //GridObjArray[m_ExistsIndex].datagrid('loadData', myData);
     }
 }
 /////////////////////////////获得chart/////////////////////////
@@ -134,7 +134,7 @@ function CreateGridChart(myData, myContainerId, myIsShowGrid, myChartType) {
     }
     else {
         m_WindowsHtml = '<div class="easyui-layout" data-options="fit:true,border:false">' +
-                '<div id = "' + myContainerId + '_Chart" class="easyui-panel" data-options="region:\'center\',border:false" style="margin-left:20px;padding-right:100px;padding-bottom:10px;">' +
+                '<div id = "' + myContainerId + '_Chart" class="easyui-panel" data-options="region:\'center\',border:false,fit:true" style="margin-left:20px;padding-right:100px;padding-bottom:10px;">' +
 	            '</div>' +
 	        '</div>';
 

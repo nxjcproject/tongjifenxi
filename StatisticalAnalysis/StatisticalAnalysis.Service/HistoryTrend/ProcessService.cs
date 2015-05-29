@@ -21,16 +21,17 @@ namespace StatisticalAnalysis.Service.HistoryTrend
             string connectionString = ConnectionStringFactory.NXJCConnectionString;
             ISqlServerDataFactory dataFactory = new SqlServerDataFactory(connectionString);
 
-            string queryString = @"SELECT *
-                                     FROM [dbo].[formula_FormulaDetail]
-                                    WHERE [KeyID] = (
-                                        SELECT [KeyID]
-                                          FROM [tz_Formula]
-                                         WHERE [Type] = 2 AND
-                                        	   [ENABLE] = 1 AND
-                                        	   [OrganizationID] = @organizationId
-                                        )
-                                ";
+            string queryString = @"SELECT A.Name + B.Name as Name,
+                                        A.OrganizationID as OrganizationID,
+                                        B.VariableId as VariableId,
+                                        B.LevelCode as LevelCode,
+                                        B.LevelType as LevelType
+                                        from tz_Formula A, formula_FormulaDetail B 
+                                        where A.KeyID = B.KeyID
+                                        and A.Type = 2
+                                        and A.ENABLE = 1
+                                        and A.State = 0
+                                        and A.OrganizationID = @organizationId";
 
             SqlParameter[] parameters = new SqlParameter[]{
                 new SqlParameter("organizationId", organizationId)

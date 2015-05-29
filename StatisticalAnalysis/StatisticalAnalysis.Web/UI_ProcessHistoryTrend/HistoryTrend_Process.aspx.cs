@@ -53,9 +53,9 @@ namespace StatisticalAnalysis.Web.UI_ProcessHistoryTrend
         {
             DataTable tagTable = new DataTable();
             tagTable.Columns.Add("OrganizationID", typeof(string));
-            tagTable.Columns.Add("LevelCode", typeof(string));
+            tagTable.Columns.Add("VariableId", typeof(string));
             tagTable.Columns.Add("Name", typeof(string));
-
+            tagTable.Columns.Add("LevelType", typeof(string));
             return tagTable;
         }
 

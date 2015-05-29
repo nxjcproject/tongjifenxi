@@ -24,7 +24,14 @@
 
         function onTagItemSelect(row) {
             if (typeof (window.parent.onTagItemSelect) == "function") {
+                var m_TagName = row.Name;
                 row.OrganizationID = $('#organizationId').val();
+                var m_TreeData = $('#processTable').treegrid('getParent', row.id)
+                while (m_TreeData != null && m_TreeData != undefined && m_TreeData != NaN) {
+                    m_TagName = m_TreeData.Name + '>>' + m_TagName;
+                    m_TreeData = $('#processTable').treegrid('getParent', m_TreeData.id);
+                }
+                row.Name = m_TagName;
                 window.parent.onTagItemSelect(row);
             }
         }

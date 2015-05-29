@@ -26,13 +26,13 @@ namespace StatisticalAnalysis.Infrastruture.Utility
                 destination.Columns.Add(dc);
             }
 
-            if (source.Columns.Contains("OrganizationID") && source.Columns.Contains("LevelCode"))
+            if (source.Columns.Contains("OrganizationID") && source.Columns.Contains("VariableId"))
             {
                 DataRow dr = destination.NewRow();
 
                 for (int i = 0; i < source.Rows.Count; i++)
                 {
-                    if (i > 0 && (source.Rows[i]["OrganizationID"].ToString() != source.Rows[i - 1]["OrganizationID"].ToString() || source.Rows[i]["LevelCode"].ToString() != source.Rows[i - 1]["LevelCode"].ToString()))
+                    if (i > 0 && (source.Rows[i]["OrganizationID"].ToString() != source.Rows[i - 1]["OrganizationID"].ToString() || source.Rows[i]["VariableId"].ToString() != source.Rows[i - 1]["VariableId"].ToString()))
                     {
                         destination.Rows.Add(dr);
                         dr = destination.NewRow();
