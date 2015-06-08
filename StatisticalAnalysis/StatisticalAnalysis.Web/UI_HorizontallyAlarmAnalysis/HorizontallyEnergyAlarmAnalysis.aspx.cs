@@ -31,7 +31,7 @@ namespace StatisticalAnalysis.Web.UI_HorizontallyAlarmAnalysis
         [WebMethod]
         public static string GetLableName()
         {
-            string json = HorizontallyEnergyAlarmAnalysisService.GetLableNames();
+            string json = LabelNameService.GetLableNames();
             return json;
         }
 

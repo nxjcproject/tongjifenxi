@@ -6,31 +6,59 @@
 var g_labelName;
 var g_labelList = [];//标签列表数组（参与对比的标签LevelCode）
 var g_labelLengh = 0;
-var g_plot1=new Object();
+var g_plot1 = new Object();
+var g_type=2;//停机原因（0：全部停机；1：无原因停机；2：原因分类）//默认为原因分类
+var g_reason;//停机原因
 
 $(document).ready(function () {
+    initMachineHaltReason();
     initDate();
     initDatagrid('', 'first');
     initLabelName();
+    radioClick();
+    //$(":radio").click(function () {
+    //    alert("您是..." + $(this).val());
+    //});
 })
+
+function initMachineHaltReason() {
+    var myURL = "HorizontallyMachineHaltAnalysis.aspx/GetMachineHaltReason";
+    var sendData = '';
+    $.ajax({
+        type: "POST",
+        url: myURL,
+        data: sendData,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (msg) {
+            var myData = JSON.parse(msg.d);
+            $('#MachineHaltReason').combotree({
+                data: myData,
+                valueField: 'MachineHaltReasonID',
+                textField: 'ReasonText',
+                editable:false
+            });
+        }
+    });
+}
 
 function initDate() {
     var date = new Date();
     var startDate = new Date();
     startDate.setDate(startDate.getDate() - 10);
-    var formateDate = date.getFullYear() + '-' + (date.getMonth() + 1)+'-' + date.getDate() + " " + date.toTimeString();
-    var formateStartDate = startDate.getFullYear() + '-' + (startDate.getMonth() + 1)+'-' + startDate.getDate() + " " + startDate.toTimeString();
+    var formateDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + " " + date.toTimeString();
+    var formateStartDate = startDate.getFullYear() + '-' + (startDate.getMonth() + 1) + '-' + startDate.getDate() + " " + startDate.toTimeString();
     $('#StartTime').datetimebox('setValue', formateStartDate);
     $('#EndTime').datetimebox('setValue', formateDate);
 }
 //加载datagrid
-function initDatagrid(myData,myType) {
+function initDatagrid(myData, myType) {
     if (myType == 'first') {
         $('#labelListId').datagrid({
             data: myData,
             rownumbers: true,
             singleSelect: true,
-            striped:true,
+            striped: true,
             columns: [[
                 { field: 'Name', title: '名称', width: 250 },
                 { field: 'LevelCode', title: '组织机构', width: 100, hidden: true }
@@ -51,7 +79,7 @@ function initDatagrid(myData,myType) {
 }
 //获取标签名称
 function initLabelName() {
-    var myURL = "HorizontallyEnergyAlarmAnalysis.aspx/GetLableName";
+    var myURL = "HorizontallyMachineHaltAnalysis.aspx/GetLableName";
     var sendData = '';
     $.ajax({
         type: "POST",
@@ -60,14 +88,14 @@ function initLabelName() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {
-            g_labelName=JSON.parse(msg.d);
+            g_labelName = JSON.parse(msg.d);
         }
     });
 }
 
 //目录树双击事件
 function onOrganisationTreeClick(node) {
-    
+
     //var myOrganizationId = node.OrganizationId;
     var myLevelCode = node.id;
     //获取标签的长度
@@ -98,7 +126,7 @@ function labelObj(myOrganizationId, myName) {
     return t_label;
 }
 //追加新行
-function datagridAppendRow(levelCode,name) {
+function datagridAppendRow(levelCode, name) {
     $('#labelListId').datagrid('appendRow',
         {
             LevelCode: levelCode,
@@ -108,11 +136,17 @@ function datagridAppendRow(levelCode,name) {
 function refresh() {
     query();
 }
-function query() {
+function query() {   
+    if (g_type ==2) {
+        g_reason = $('#MachineHaltReason').combotree('getValue');
+        if(g_reason == ''||g_reason==undefined||g_reason==null){
+            $.messager.alert('提示', '请选择停机原因');
+            return;}
+    }
     var startTime = $("#StartTime").datetimebox('getValue');
     var endTime = $("#EndTime").datetimebox('getValue');
-    var myURL = "HorizontallyEnergyAlarmAnalysis.aspx/GetData";
-    var sendData = '{levelCodeString:"' + g_labelList + '",startTime:"' + startTime + '",endTime:"' + endTime + '",labelLength:"' + g_labelLengh + '"}';
+    var myURL = "HorizontallyMachineHaltAnalysis.aspx/GetMachineHaltCount";
+    var sendData = '{levelCodeString:"' + g_labelList + '",startTime:"' + startTime + '",endTime:"' + endTime + '",labelLength:"' + g_labelLengh + '",type:"' + g_type + '",reason:"'+g_reason + '"}';
     $.ajax({
         type: "POST",
         url: myURL,
@@ -122,7 +156,7 @@ function query() {
         success: function (msg) {
             var myData = JSON.parse(msg.d);
             var count = g_labelList.length;
-            for (var i = 0; i < count; i++) {               
+            for (var i = 0; i < count; i++) {
                 var t_label = g_labelName[g_labelList[i]];
                 if (myData['rows'][0][t_label] == undefined) {
                     myData['rows'][0][t_label] = 0;
@@ -138,7 +172,7 @@ function query() {
     });
 }
 
-function updateGridChart(myData) {   
+function updateGridChart(myData) {
     updateGrid(myData);
     updateChart(myData);
 }
@@ -180,13 +214,26 @@ function updateChart(myData) {
   );
 }
 
+//单选框点击事件
+function radioClick(){
+    $(":radio").click(function(){
+        var myType = $(this).val();
+        g_type = myType;
+        if (myType == '2') {
+            $("#MachineHaltReason").combotree('enable');
+        }
+        else {
+            $("#MachineHaltReason").combotree('disable');
+        }
+    })}
+
 //清空列表
 function removeAll() {
     g_labelLengh = 0;
     var count = g_labelList.length;
     g_labelList = [];
     for (var i = 0; i < count; i++) {
-        $('#labelListId').datagrid('deleteRow',0);
+        $('#labelListId').datagrid('deleteRow', 0);
     }
 }
 //判断数组内元素是否存在

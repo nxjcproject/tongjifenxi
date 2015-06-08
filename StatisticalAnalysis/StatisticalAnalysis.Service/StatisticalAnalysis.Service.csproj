@@ -64,6 +64,8 @@
     <Compile Include="HistoryTrend\HorizontalAnalysisService.cs" />
     <Compile Include="HistoryTrend\ProcessService.cs" />
     <Compile Include="HorizontallyAlarmAnalysis\HorizontallyEnergyAlarmAnalysisService.cs" />
+    <Compile Include="HorizontallyAlarmAnalysis\HorizontallyMachineHaltAnalysisService.cs" />
+    <Compile Include="HorizontallyAlarmAnalysis\LabelNameService.cs" />
     <Compile Include="HorizontallyAlarmAnalysis\VerticallyToHorizontally.cs" />
     <Compile Include="PlanAndActual\CementTargetCompletion.cs" />
     <Compile Include="PlanAndActual\PlanAndTargetCompletionService.cs" />

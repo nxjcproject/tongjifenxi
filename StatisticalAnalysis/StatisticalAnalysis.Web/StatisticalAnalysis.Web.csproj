@@ -43,7 +43,7 @@
   <ItemGroup>
     <Reference Include="EasyUIJsonParser, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\EasyUIJsonParser.dll</HintPath>
+      <HintPath>..\..\..\EasyUIJsonParser\EasyUIJsonParser\EasyUIJsonParser\bin\Debug\EasyUIJsonParser.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="StatisticalAnalysis.Infrastruture, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -1626,6 +1626,7 @@
     <Content Include="UI_HorizontallyAlarmAnalysis\HorizontallyMachineHaltAnalysis.aspx" />
     <Content Include="UI_HorizontallyAlarmAnalysis\HorizontallyEnergyAlarmAnalysis.aspx" />
     <Content Include="UI_HorizontallyAlarmAnalysis\js\page\HorizontallyEnergyAlarmAnalysis.js" />
+    <Content Include="UI_HorizontallyAlarmAnalysis\js\page\HorizontallyMachineHaltAnalysis.js" />
     <Content Include="UI_PlanAndTargetCompletion\css\page\PlanAndTargetCompletion.css" />
     <Content Include="UI_PlanAndTargetCompletion\js\page\PlanAndTargetCompletion.js" />
     <Content Include="UI_PlanAndTargetCompletion\PlanAndTargetCompletion.aspx" />
