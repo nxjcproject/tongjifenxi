@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatisticalAnalysis.Web", "StatisticalAnalysis.Web\StatisticalAnalysis.Web.csproj", "{88E766DB-02E1-4DC8-80FB-E3186D65314A}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatisticalAnalysis.Service", "StatisticalAnalysis.Service\StatisticalAnalysis.Service.csproj", "{CA1CB008-2B96-4732-A14A-A53AFE3BD480}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatisticalAnalysis.Infrastruture", "StatisticalAnalysis.Infrastruture\StatisticalAnalysis.Infrastruture.csproj", "{BB3D0F7B-08DF-4903-A9C7-814443A4B4E1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatisticalAnalysis.Web", "StatisticalAnalysis.Web\StatisticalAnalysis.Web.csproj", "{88E766DB-02E1-4DC8-80FB-E3186D65314A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{88E766DB-02E1-4DC8-80FB-E3186D65314A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88E766DB-02E1-4DC8-80FB-E3186D65314A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88E766DB-02E1-4DC8-80FB-E3186D65314A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88E766DB-02E1-4DC8-80FB-E3186D65314A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CA1CB008-2B96-4732-A14A-A53AFE3BD480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CA1CB008-2B96-4732-A14A-A53AFE3BD480}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA1CB008-2B96-4732-A14A-A53AFE3BD480}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -21,10 +25,6 @@ Global
 		{BB3D0F7B-08DF-4903-A9C7-814443A4B4E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB3D0F7B-08DF-4903-A9C7-814443A4B4E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB3D0F7B-08DF-4903-A9C7-814443A4B4E1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{88E766DB-02E1-4DC8-80FB-E3186D65314A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{88E766DB-02E1-4DC8-80FB-E3186D65314A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{88E766DB-02E1-4DC8-80FB-E3186D65314A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{88E766DB-02E1-4DC8-80FB-E3186D65314A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

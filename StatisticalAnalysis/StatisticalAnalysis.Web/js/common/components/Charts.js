@@ -268,7 +268,7 @@ function GetDateXLineChart(myChartObjId, myData, myTitle) {
                                 formatString = formatString + ":%S";
                             }
                         }
-                        var m_DateTemp = m_FullYear + "/" + (m_Month - 1).toString() + "/" + m_Day + " " + m_Hour + ":" + m_Minute + ":" + m_Second;
+                        var m_DateTemp = m_FullYear + "/" + m_Month.toString() + "/" + m_Day + " " + m_Hour + ":" + m_Minute + ":" + m_Second;
                         m_LineTemp.push([m_DateTemp, parseFloat(m_Rows[i][m_Name])]);
                     }
                 }
@@ -456,15 +456,17 @@ function GetBarChart(myChartObjId, myData, myTitle) {
         m_AxisX.push(myData['columns'][i]['title']);
     }
     if (m_Rows.length == 1) {
+        var m_BarTemp = [];
         for (var j = 1; j < myData['columns'].length; j++) {
-            m_Bars.push(parseFloat(m_Rows[0][myData['columns'][j].field]));    //m_Rows[i][myData['columns'][j].field]
+            m_BarTemp.push(parseFloat(m_Rows[0][myData['columns'][j].field]));    //m_Rows[i][myData['columns'][j].field]
         }
         //////////////////////////////找到最大的bar累加和////////////////////////////
-        for (var j = 0; j < m_Bars.length; j++) {
-            if (m_Bars[j] > m_MaxBarValue) {
-                m_MaxBarValue = m_Bars[j];
+        for (var j = 0; j < m_BarTemp.length; j++) {
+            if (m_BarTemp[j] > m_MaxBarValue) {
+                m_MaxBarValue = m_BarTemp[j];
             }
         }
+        m_Bars.push(m_BarTemp);
         m_MaxBarValue = GetYaxisMax(m_MaxBarValue);
     }
     else if (m_Rows.length > 1) {
@@ -592,13 +594,17 @@ function GetMultiBarChart(myChartObjId, myData, myTitle) {
     }
     ///////////////////////////////填充数据////////////////////////////////
     if (m_Rows.length == 1) {
+        var m_BarTemp = [];
         for (var j = 1; j < myData['columns'].length; j++) {
-            m_Bars.push(parseFloat(m_Rows[0][myData['columns'][j].field]));
+            m_BarTemp.push(parseFloat(m_Rows[0][myData['columns'][j].field]));    //m_Rows[i][myData['columns'][j].field]
         }
         //////////////////////////////找到最大的bar累加和////////////////////////////
-        for (var j = 0; j < m_Bars.length; j++) {
-            m_MaxBarValue = m_MaxBarValue + m_Bars[j];
+        for (var j = 0; j < m_BarTemp.length; j++) {
+            if (m_BarTemp[j] > m_MaxBarValue) {
+                m_MaxBarValue = m_BarTemp[j];
+            }
         }
+        m_Bars.push(m_BarTemp);
         m_MaxBarValue = GetYaxisMax(m_MaxBarValue);
     }
     else if (m_Rows.length > 1) {

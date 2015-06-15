@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicHistoryTrend\MaterialsHistoryTrendService.cs" />
     <Compile Include="CementCostAnalysis\CementCostAnalysisService.cs" />
     <Compile Include="CementCostAnalysis\CementCostFSTAnalysisTableHelper.cs" />
     <Compile Include="CoalCostAnalysis\CoalConsumptionAnalysisService.cs" />
@@ -61,12 +62,8 @@
     <Compile Include="ElectricityCostAnalysis\ElectricityPVFUsageAnalysisService.cs" />
     <Compile Include="EnergyAlarmAnalysis\AlarmComprehensiveAnalysisService.cs" />
     <Compile Include="EnergyAlarmAnalysis\AlarmCountAnalysisService.cs" />
-    <Compile Include="HistoryTrend\HorizontalAnalysisService.cs" />
-    <Compile Include="HistoryTrend\ProcessService.cs" />
-    <Compile Include="HorizontallyAlarmAnalysis\HorizontallyEnergyAlarmAnalysisService.cs" />
-    <Compile Include="HorizontallyAlarmAnalysis\HorizontallyMachineHaltAnalysisService.cs" />
-    <Compile Include="HorizontallyAlarmAnalysis\LabelNameService.cs" />
-    <Compile Include="HorizontallyAlarmAnalysis\VerticallyToHorizontally.cs" />
+    <Compile Include="BasicHistoryTrend\HorizontalAnalysisService.cs" />
+    <Compile Include="BasicHistoryTrend\ProcessService.cs" />
     <Compile Include="PlanAndActual\CementTargetCompletion.cs" />
     <Compile Include="PlanAndActual\PlanAndTargetCompletionService.cs" />
     <Compile Include="PlanAndActual\TargetCompletion.cs" />

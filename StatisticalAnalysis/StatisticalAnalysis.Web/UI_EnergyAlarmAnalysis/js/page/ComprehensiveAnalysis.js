@@ -67,8 +67,7 @@ function query() {
             // 起始时间月日应为年的1月1号
 
         case 'yearly':
-            var array = endTime.split('-');
-            endTime = new Date(array[0], array[1] - 1, array[2]);
+            endTime = new Date(endTime);
             endTime.setMonth(12 - 1, getLastDayOfMonth(endTime.getFullYear(), 12));
             endTime.setHours(23, 59, 59, 999);
             startTime = new Date(endTime.getFullYear(), 0, 1);
@@ -83,12 +82,10 @@ function query() {
             // 起始时间月日应为选定月的1号
 
         case 'monthly':
-            var array = endTime.split('-');
-            endTime = new Date(array[0], array[1] - 1, array[2]);      
+            endTime = new Date(endTime);
             endTime.setDate(getLastDayOfMonth(endTime.getFullYear(), endTime.getMonth() + 1));
             endTime.setHours(23, 59, 59, 999);
-            startTime = new Date();
-            startTime.setFullYear(endTime.getFullYear(), endTime.getMonth(), 1);
+            startTime = new Date(endTime.getFullYear(), 0, 1);
             startTime.setHours(00, 00, 00, 000);
 
             startTime = startTime.toLocaleString();
@@ -100,12 +97,12 @@ function query() {
             // 结束时间设定为所选时间的23点59分59秒
 
         case 'custom':
-            var array = endTime.split('-');
-            endTime = new Date(array[0], array[1] - 1, array[2]);
-            var arrayStart = startTime.split('-');
-            startTime = new Date(arrayStart[0], arrayStart[1] - 1, arrayStart[2]);
+            endTime = new Date(endTime);
+            startTime = new Date(startTime);
+
             endTime.setHours(23, 59, 59, 999);
             startTime.setHours(00, 00, 00, 000);
+
             startTime = startTime.toLocaleString();
             endTime = endTime.toLocaleString();
             break;
