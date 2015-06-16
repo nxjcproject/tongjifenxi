@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicHistoryTrend\AmmetersHistoryTrendService.cs" />
     <Compile Include="BasicHistoryTrend\MaterialsHistoryTrendService.cs" />
     <Compile Include="CementCostAnalysis\CementCostAnalysisService.cs" />
     <Compile Include="CementCostAnalysis\CementCostFSTAnalysisTableHelper.cs" />
