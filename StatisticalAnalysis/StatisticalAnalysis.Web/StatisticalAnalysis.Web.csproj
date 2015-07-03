@@ -43,7 +43,7 @@
   <ItemGroup>
     <Reference Include="EasyUIJsonParser, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\组件\EasyUIJsonParser\EasyUIJsonParser\bin\Debug\EasyUIJsonParser.dll</HintPath>
+      <HintPath>..\..\..\组件\EasyUIJsonParser\EasyUIJsonParser\EasyUIJsonParser\bin\Debug\EasyUIJsonParser.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="StatisticalAnalysis.Infrastruture, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

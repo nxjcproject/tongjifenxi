@@ -117,10 +117,10 @@ namespace StatisticalAnalysis.Service.BasicHistoryTrend
             foreach (DataRow dr in tagTable.Rows)
             {
                 queryBuilder.Append(string.Format(queryString, dr["OrganizationId"], dr["VariableId"], dr["TagColumnName"], dr["TagTableName"], m_TimeInterval, m_vDateColumn));
-                queryBuilder.Append(" UNION ");
+                queryBuilder.Append(" UNION ALL ");
             }
 
-            queryBuilder.Remove(queryBuilder.Length - 7, 7);
+            queryBuilder.Remove(queryBuilder.Length - 11, 11);
 
             SqlParameter[] parameters = new SqlParameter[]{
                 new SqlParameter("startTime", startTime),

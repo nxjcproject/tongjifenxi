@@ -40,16 +40,16 @@ namespace StatisticalAnalysis.Service.BasicHistoryTrend
                 if (dr["LevelType"].ToString().Replace(" ", "") == "MainMachine")
                 {
                     queryBuilder.Append(string.Format(queryStringMainMachine, dr["OrganizationID"], dr["VariableId"], ConnectionStringFactory.GetAmmeterDatabaseName(dr["OrganizationID"].ToString())));
-                    queryBuilder.Append(" UNION ");
+                    queryBuilder.Append(" UNION ALL ");
                 }
                 else
                 {
                     queryBuilder.Append(string.Format(queryStringProductionOrProcess, dr["OrganizationID"], dr["VariableId"], ConnectionStringFactory.GetAmmeterDatabaseName(dr["OrganizationID"].ToString())));
-                    queryBuilder.Append(" UNION ");
+                    queryBuilder.Append(" UNION ALL ");
                 }
             }
 
-            queryBuilder.Remove(queryBuilder.Length - 8, 7);
+            queryBuilder.Remove(queryBuilder.Length - 12, 11);
 
             SqlParameter[] parameters = new SqlParameter[]{
                 new SqlParameter("startTime", startTime),
