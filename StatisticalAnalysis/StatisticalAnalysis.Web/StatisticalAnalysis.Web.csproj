@@ -1628,6 +1628,10 @@
     <Content Include="UI_EnergyAlarmAnalysis\SimilarAlarmAnalysis.aspx" />
     <Content Include="UI_BasicHistoryTrend\js\page\HistoryTrend_Materials.js" />
     <Content Include="UI_BasicHistoryTrend\HistoryTrend_Materials.aspx" />
+    <Content Include="UI_HorizontallyAlarmAnalysis\HorizontallyEnergyAlarmAnalysis.aspx" />
+    <Content Include="UI_HorizontallyAlarmAnalysis\HorizontallyMachineHaltAnalysis.aspx" />
+    <Content Include="UI_HorizontallyAlarmAnalysis\js\page\HorizontallyEnergyAlarmAnalysis.js" />
+    <Content Include="UI_HorizontallyAlarmAnalysis\js\page\HorizontallyMachineHaltAnalysis.js" />
     <Content Include="UI_PlanAndTargetCompletion\css\page\PlanAndTargetCompletion.css" />
     <Content Include="UI_PlanAndTargetCompletion\js\page\PlanAndTargetCompletion.js" />
     <Content Include="UI_PlanAndTargetCompletion\PlanAndTargetCompletion.aspx" />
@@ -1731,6 +1735,20 @@
     <Compile Include="UI_BasicHistoryTrend\HistoryTrend_Materials.aspx.designer.cs">
       <DependentUpon>HistoryTrend_Materials.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UI_HorizontallyAlarmAnalysis\HorizontallyEnergyAlarmAnalysis.aspx.cs">
+      <DependentUpon>HorizontallyEnergyAlarmAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI_HorizontallyAlarmAnalysis\HorizontallyEnergyAlarmAnalysis.aspx.designer.cs">
+      <DependentUpon>HorizontallyEnergyAlarmAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI_HorizontallyAlarmAnalysis\HorizontallyMachineHaltAnalysis.aspx.cs">
+      <DependentUpon>HorizontallyMachineHaltAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI_HorizontallyAlarmAnalysis\HorizontallyMachineHaltAnalysis.aspx.designer.cs">
+      <DependentUpon>HorizontallyMachineHaltAnalysis.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UI_PlanAndTargetCompletion\PlanAndTargetCompletion.aspx.cs">
       <DependentUpon>PlanAndTargetCompletion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1758,6 +1776,7 @@
     <Folder Include="images\common\" />
     <Folder Include="images\page\" />
     <Folder Include="js\page\" />
+    <Folder Include="UI_HorizontallyAlarmAnalysis\css\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="lib\pllib\syntaxhighlighter\LGPL-LICENSE" />
