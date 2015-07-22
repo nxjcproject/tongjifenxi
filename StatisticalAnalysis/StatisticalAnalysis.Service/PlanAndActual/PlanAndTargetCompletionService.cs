@@ -25,13 +25,13 @@ namespace StatisticalAnalysis.Service.PlanAndActual
             DataTable itemtable;
             if (type == "")
             {
-                string sql = "SELECT [QuotasName] FROM [plan_EnergyConsumptionPlan_Template] ORDER BY [ProductionLineType],[DisplayIndex]";
+                string sql = "SELECT [QuotasID] as QuotasID FROM [plan_EnergyConsumptionPlan_Template] ORDER BY [ProductionLineType],[DisplayIndex]";
                 Query query = new Query("plan_EnergyConsumptionPlan_Template");
                 itemtable = _dataFactory.Query(sql);
             }
             else
             {
-                string sql = "SELECT [QuotasID] FROM [plan_EnergyConsumptionPlan_Template] WHERE [ProductionLineType]=@type ORDER BY [ProductionLineType],[DisplayIndex]";
+                string sql = "SELECT [QuotasID] as QuotasID FROM [plan_EnergyConsumptionPlan_Template] WHERE [ProductionLineType]=@type ORDER BY [ProductionLineType],[DisplayIndex]";
                 SqlParameter parameter = new SqlParameter("type", type);
                 itemtable = _dataFactory.Query(sql, parameter);
             }
@@ -54,7 +54,7 @@ namespace StatisticalAnalysis.Service.PlanAndActual
             planTable = ReportHelper.MyTotalOn(temp, "QuotasID", "January,February,March,April,May,June,July,August,September,October,November,December,Totals");
             //取出完成情况表
             DataTable targetCompletionTable;
-            targetCompletionTable = TargetCompletion.TableQuery(organizationId, date);
+            targetCompletionTable = TargetCompletion.TableQuery(organizationId, date, item);
             DataTable result = targetCompletionTable.Clone();
             DataRow[] rows;
             rows = targetCompletionTable.Select("项目指标='" + item + "'");

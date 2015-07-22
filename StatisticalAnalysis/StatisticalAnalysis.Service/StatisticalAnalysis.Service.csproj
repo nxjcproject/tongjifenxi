@@ -33,8 +33,14 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoSetParameters">
+      <HintPath>..\..\..\组件\StandardCalculation\AutoSetParameters\bin\Debug\AutoSetParameters.dll</HintPath>
+    </Reference>
     <Reference Include="SqlServerDataAdapter">
       <HintPath>..\Lib\SqlServerDataAdapter.dll</HintPath>
+    </Reference>
+    <Reference Include="Standard_GB16780-2012">
+      <HintPath>..\..\..\组件\StandardCalculation\Standard_GB16780-2012\bin\Release\Dotfuscated\Standard_GB16780-2012.dll</HintPath>
     </Reference>
     <Reference Include="StatisticalReport.Infrastructure">
       <HintPath>..\Lib\StatisticalReport.Infrastructure.dll</HintPath>
@@ -65,6 +71,10 @@
     <Compile Include="EnergyAlarmAnalysis\AlarmCountAnalysisService.cs" />
     <Compile Include="BasicHistoryTrend\HorizontalAnalysisService.cs" />
     <Compile Include="BasicHistoryTrend\ProcessService.cs" />
+    <Compile Include="HorizontallyAlarmAnalysis\HorizontallyEnergyAlarmAnalysisService.cs" />
+    <Compile Include="HorizontallyAlarmAnalysis\HorizontallyMachineHaltAnalysisService.cs" />
+    <Compile Include="HorizontallyAlarmAnalysis\LabelNameService.cs" />
+    <Compile Include="HorizontallyAlarmAnalysis\VerticallyToHorizontally.cs" />
     <Compile Include="PlanAndActual\CementTargetCompletion.cs" />
     <Compile Include="PlanAndActual\PlanAndTargetCompletionService.cs" />
     <Compile Include="PlanAndActual\TargetCompletion.cs" />
