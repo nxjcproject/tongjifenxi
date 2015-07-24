@@ -22,11 +22,11 @@ namespace StatisticalAnalysis.Service.BasicHistoryTrend
         private static DataTable GetDatabaseByOrganizationId(string organizationId)
         {
             string sql = @"SELECT [D].[MeterDatabase]
-                             FROM [NXJC].[dbo].[system_Organization] AS [O] INNER JOIN
-                                  [NXJC].[dbo].[system_Database] AS [D] ON [O].[DatabaseID] = [D].[DatabaseID]
+                             FROM [system_Organization] AS [O] INNER JOIN
+                                  [system_Database] AS [D] ON [O].[DatabaseID] = [D].[DatabaseID]
                             WHERE [O].[LevelCode] LIKE (
                                   SELECT [L].[LevelCode]
-	                                FROM [NXJC].[dbo].[system_Organization] AS [L]
+	                                FROM [system_Organization] AS [L]
 		                           WHERE [L].[organizationId] = @organizationId
 	                              ) + '%' AND
                                   [O].[LevelType] = 'Factory'";
@@ -50,17 +50,17 @@ namespace StatisticalAnalysis.Service.BasicHistoryTrend
             StringBuilder queryBuilder = new StringBuilder();
 
             queryBuilder.Append(@"SELECT [O].[OrganizationID] AS [KeyId], [O].[OrganizationID] AS[OrganizationId], [O].[Name] AS [Name], '0' AS [ParentKeyId], '' AS [VariableId], 'Company' AS [LevelType], '' AS [TagTableName], '' AS [TagColumnName]
-                                    FROM [NXJC].[dbo].[system_Organization] AS [O]
+                                    FROM [system_Organization] AS [O]
                                    WHERE [O].[OrganizationID] = @organizationId AND
                                          [O].[LevelType] = 'Company'
 
                                    UNION
                              
                                   SELECT [O].[OrganizationID] AS [KeyId], [O].[OrganizationID] AS[OrganizationId], [O].[Name] AS [Name], @organizationId AS [ParentKeyId], '' AS [VariableId], 'Factory' AS [LevelType], '' AS [TagTableName], '' AS [TagColumnName]
-                                    FROM [NXJC].[dbo].[system_Organization] AS [O]
+                                    FROM [system_Organization] AS [O]
                                    WHERE [O].[LevelCode] LIKE (
                                          SELECT [L].[LevelCode]
-	                                       FROM [NXJC].[dbo].[system_Organization] AS [L]
+	                                       FROM [system_Organization] AS [L]
 		                                  WHERE [L].[OrganizationID] = @organizationId
 	                                     ) + '%' AND
                                          [O].[LevelType] = 'Factory'
