@@ -131,5 +131,30 @@ namespace StatisticalAnalysis.Service.EnergyAlarmAnalysis
 
             return result;
         }
+
+        /// <summary>
+        /// 获得报警详细信息
+        /// </summary>
+        /// <param name="organizationId"></param>
+        /// <param name="startTime"></param>
+        /// <param name="endTime"></param>
+        /// <returns></returns>
+        public static DataTable GetAlarmDetailInfo(string organizationId, DateTime startTime, DateTime endTime)
+        {
+            string connectionString = ConnectionStringFactory.NXJCConnectionString;
+            ISqlServerDataFactory dataFactory = new SqlServerDataFactory(connectionString);
+            string mySql = @"select A.OrganizationID,A.LevelCode,B.Name as ProductLineName,A.Name,A.EnergyConsumptionType,count(1) as [Count]
+                                from shift_EnergyConsumptionAlarmLog A,system_Organization B,
+                                (select LevelCode from system_Organization where OrganizationID=@organizationId) C
+                                where A.OrganizationID=B.OrganizationID
+                                and B.LevelCode like C.LevelCode+'%'
+                                and A.StartTime>=@startTime
+                                and A.StartTime<=@endTime
+                                group by B.Name,A.Name,A.EnergyConsumptionType,A.OrganizationID,A.LevelCode
+                                order by EnergyConsumptionType,A.OrganizationID,A.LevelCode";
+            SqlParameter[] parameters = { new SqlParameter("organizationId", organizationId), 
+                                            new SqlParameter("startTime", startTime), new SqlParameter("endTime", endTime) };
+            return dataFactory.Query(mySql,parameters);
+        }
     }
 }

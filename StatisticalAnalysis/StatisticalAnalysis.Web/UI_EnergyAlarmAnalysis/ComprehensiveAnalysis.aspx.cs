@@ -85,5 +85,13 @@ namespace StatisticalAnalysis.Web.UI_EnergyAlarmAnalysis
 
             return json;
         }
+
+        [WebMethod]
+        public static string GetReportData(string organizationId, string startTime, string endTime)
+        {
+            DataTable table = AlarmComprehensiveAnalysisService.GetAlarmDetailInfo(organizationId, DateTime.Parse(startTime), DateTime.Parse(endTime));
+            string json = EasyUIJsonParser.DataGridJsonParser.DataTableToJson(table);
+            return json;
+        }
     }
 }

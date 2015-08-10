@@ -87,5 +87,13 @@ namespace StatisticalAnalysis.Web.UI_DowntimeAnalysis
 
             return json;
         }
+
+        [WebMethod]
+        public static string GetReportData(string organizationId, string startTime, string endTime)
+        {
+            DataTable table = DowntimeComprehensiveAnalysisService.GetAlarmDetailInfo(organizationId, DateTime.Parse(startTime), DateTime.Parse(endTime));
+            string json = EasyUIJsonParser.DataGridJsonParser.DataTableToJson(table);
+            return json;
+        }
     }
 }

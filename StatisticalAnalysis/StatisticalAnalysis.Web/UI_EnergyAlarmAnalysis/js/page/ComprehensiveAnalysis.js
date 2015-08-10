@@ -2,6 +2,7 @@
 
 $(document).ready(function () {
 
+    loadDataGrid("first");
     // 为分析类型挂载change事件
 
     $("input[type=radio][name=analysisType]").change(function () {
@@ -67,7 +68,8 @@ function query() {
             // 起始时间月日应为年的1月1号
 
         case 'yearly':
-            endTime = new Date(endTime);
+            var array = endTime.split('-');
+            endTime = new Date(array[0], array[1] - 1, array[2]);
             endTime.setMonth(12 - 1, getLastDayOfMonth(endTime.getFullYear(), 12));
             endTime.setHours(23, 59, 59, 999);
             startTime = new Date(endTime.getFullYear(), 0, 1);
@@ -82,10 +84,12 @@ function query() {
             // 起始时间月日应为选定月的1号
 
         case 'monthly':
-            endTime = new Date(endTime);
+            var array = endTime.split('-');
+            endTime = new Date(array[0], array[1] - 1, array[2]);
             endTime.setDate(getLastDayOfMonth(endTime.getFullYear(), endTime.getMonth() + 1));
             endTime.setHours(23, 59, 59, 999);
-            startTime = new Date(endTime.getFullYear(), 0, 1);
+            startTime = new Date();
+            startTime.setFullYear(endTime.getFullYear(), endTime.getMonth(), 1);
             startTime.setHours(00, 00, 00, 000);
 
             startTime = startTime.toLocaleString();
@@ -97,12 +101,12 @@ function query() {
             // 结束时间设定为所选时间的23点59分59秒
 
         case 'custom':
-            endTime = new Date(endTime);
-            startTime = new Date(startTime);
-
+            var array = endTime.split('-');
+            endTime = new Date(array[0], array[1] - 1, array[2]);
+            var arrayStart = startTime.split('-');
+            startTime = new Date(arrayStart[0], arrayStart[1] - 1, arrayStart[2]);
             endTime.setHours(23, 59, 59, 999);
             startTime.setHours(00, 00, 00, 000);
-
             startTime = startTime.toLocaleString();
             endTime = endTime.toLocaleString();
             break;
@@ -125,10 +129,42 @@ function query() {
         data: "{organizationId:'" + organizationId + "',startTime:'" + startTime + "',endTime:'" + endTime + "'}",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        success: function (msg) {
+        success: function (msg) {       
             updateChart(JSON.parse(msg.d));
         }
     });
+
+    $.ajax({
+        type: "POST",
+        url: "ComprehensiveAnalysis.aspx/GetReportData",
+        data: "{organizationId:'" + organizationId + "',startTime:'" + startTime + "',endTime:'" + endTime + "'}",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (msg) {
+            var m_msg = JSON.parse(msg.d);
+            loadDataGrid("last",m_msg);
+        }
+    });
+}
+
+function loadDataGrid(type, myData) {
+    if ("first" == type) {
+        $("#Windows_Report").datagrid({
+            striped:true,
+            rownumbers: true,
+            singleSelect: true,
+            fit:true,
+            columns: [[
+                        { field: 'ProductLineName', title: '产线名称', width: 150 },
+                		{ field: 'Name', title: '报警名称', width: 150 },
+		                { field: 'EnergyConsumptionType', title: '报警类别', width: 150 },
+		                { field: 'Count', title: '报警次数', width: 100 }
+            ]]
+        });
+    }
+    else {
+        $("#Windows_Report").datagrid("loadData", myData);
+    }
 }
 
 function updateCountPanel(data) {

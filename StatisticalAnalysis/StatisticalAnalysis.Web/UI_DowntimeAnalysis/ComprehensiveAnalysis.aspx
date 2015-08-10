@@ -87,7 +87,7 @@
                             </tr>
                         </table>
                     </fieldset>
-                    <br /><br />
+                    <%--<br /><br />--%>
                     <fieldset>
                         <legend>按生产线统计</legend>
                         <table id="countByFactory" class="table" style="width:100%;">
@@ -96,7 +96,7 @@
                             </tr>
                         </table>
                     </fieldset>
-                    <br /><br />
+                    <%--<br /><br />--%>
                     <fieldset>
                         <legend>按停机原因统计</legend>
                         <table id="countByTypes" class="table" style="width:100%;">
@@ -111,6 +111,11 @@
                 <div id="Windows_Container" class="easyui-panel" data-options="region:'center', border:true, collapsible:false, split:false">
                 </div>
                 <!-- 图表结束 -->
+                <!--报表开始-->
+                <div class="easyui-panel"  data-options="region:'south',title:'报警详细信息', border:true, collapsible:true, split:false" style="height:150px;">
+                    <table id="Windows_Report"></table>
+                </div>
+                <!--报表结束-->
             </div>
         </div>
     </div>

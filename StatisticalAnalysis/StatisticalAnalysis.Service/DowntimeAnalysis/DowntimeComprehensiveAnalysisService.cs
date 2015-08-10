@@ -132,6 +132,29 @@ namespace StatisticalAnalysis.Service.DowntimeAnalysis
 
             return result;
         }
-
+        /// <summary>
+        /// 获得报警详细信息
+        /// </summary>
+        /// <param name="organizationId"></param>
+        /// <param name="startTime"></param>
+        /// <param name="endTime"></param>
+        /// <returns></returns>
+        public static DataTable GetAlarmDetailInfo(string organizationId, DateTime startTime, DateTime endTime)
+        {
+            string connectionString = ConnectionStringFactory.NXJCConnectionString;
+            ISqlServerDataFactory dataFactory = new SqlServerDataFactory(connectionString);
+            string mySql = @"select A.OrganizationID,A.Label,B.Name as ProductLineName,A.EquipmentName,'停机报警' EnergyConsumptionType,count(1) as [Count]
+                                from shift_MachineHaltLog A,system_Organization B,
+                                (select LevelCode from system_Organization where OrganizationID=@organizationId) C
+                                where A.OrganizationID=B.OrganizationID
+                                and B.LevelCode like C.LevelCode+'%'
+                                and A.HaltTime>=@startTime
+                                and A.HaltTime<=@endTime
+                                group by A.OrganizationID,A.Label,B.Name,A.EquipmentName
+                                order by EnergyConsumptionType,A.OrganizationID";
+            SqlParameter[] parameters = { new SqlParameter("organizationId", organizationId), 
+                                            new SqlParameter("startTime", startTime), new SqlParameter("endTime", endTime) };
+            return dataFactory.Query(mySql, parameters);
+        }
     }
 }
