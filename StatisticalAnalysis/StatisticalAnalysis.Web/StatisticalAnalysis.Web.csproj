@@ -1591,6 +1591,7 @@
     <Content Include="lib\pllib\syntaxhighlighter\styles\shThemejqPlot.min.css" />
     <Content Include="lib\pllib\themes\jquery.jqplot.css" />
     <Content Include="lib\pllib\themes\jquery.jqplot.min.css" />
+    <Content Include="test.aspx" />
     <Content Include="UI_BasicHistoryTrend\css\page\ProcessSelector.css" />
     <Content Include="UI_BasicHistoryTrend\HistoryTrend_Ammeters.aspx" />
     <Content Include="UI_BasicHistoryTrend\js\page\HistoryTrend_Ammeters.js" />
@@ -1644,6 +1645,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="test.aspx.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="test.aspx.designer.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UI_BasicHistoryTrend\HistoryTrend_Ammeters.aspx.cs">
       <DependentUpon>HistoryTrend_Ammeters.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

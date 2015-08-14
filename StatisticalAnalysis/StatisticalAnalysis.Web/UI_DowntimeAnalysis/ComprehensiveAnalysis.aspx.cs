@@ -19,7 +19,7 @@ namespace StatisticalAnalysis.Web.UI_DowntimeAnalysis
             {
 #if DEBUG
                 ////////////////////调试用,自定义的数据授权
-                List<string> m_DataValidIdItems = new List<string>() { "zc_nxjc_qtx" };
+                List<string> m_DataValidIdItems = new List<string>() { "zc_nxjc_byc_byf" };
                 AddDataValidIdGroup("ProductionOrganization", m_DataValidIdItems);
 #elif RELEASE
 #endif
@@ -92,7 +92,7 @@ namespace StatisticalAnalysis.Web.UI_DowntimeAnalysis
         public static string GetReportData(string organizationId, string startTime, string endTime)
         {
             DataTable table = DowntimeComprehensiveAnalysisService.GetAlarmDetailInfo(organizationId, DateTime.Parse(startTime), DateTime.Parse(endTime));
-            string json = EasyUIJsonParser.DataGridJsonParser.DataTableToJson(table);
+            string json = EasyUIJsonParser.TreeGridJsonParser.DataTableToJsonByLevelCode(table, "LevelCode");
             return json;
         }
     }

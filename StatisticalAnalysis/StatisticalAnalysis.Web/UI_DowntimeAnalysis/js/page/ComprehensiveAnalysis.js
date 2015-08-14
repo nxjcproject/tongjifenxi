@@ -43,7 +43,7 @@ function onOrganisationTreeClick(node) {
     // 设置组织机构名称
     // 用于呈现，在界面上显示当前的组织机构名称
 
-    $('#productLineName').textbox('setText', node.text);
+    $('#txtOrganization').textbox('setText', node.text);
 }
 
 function query() {
@@ -150,22 +150,24 @@ function query() {
 
 function loadDataGrid(type, myData) {
     if ("first" == type) {
-        $("#Windows_Report").datagrid({
+        $("#Windows_Report").treegrid({
             striped: true,
             rownumbers: true,
             singleSelect: true,
             fit: true,
-            columns: [[
-                        { field: 'ProductLineName', title: '产线名称', width: 150 },
-                		{ field: 'EquipmentName', title: '报警名称', width: 150 },
-		                { field: 'EnergyConsumptionType', title: '报警类别', width: 150 },
+            columns: [[                       
+                		{ field: 'EquipmentName', title: '报警名称', width: 250 },
+                        { field: 'Name', title: '产线名称', width: 150 },
+		                { field: 'Type', title: '报警类别', width: 150 },
                         { field: 'Label', title: '报警标签', width: 150 },
 		                { field: 'Count', title: '报警次数', width: 100 }
-            ]]
+            ]],
+            idField:"id",
+            treeField: "EquipmentName"
         });
     }
     else {
-        $("#Windows_Report").datagrid("loadData", myData);
+        $("#Windows_Report").treegrid("loadData", myData);
     }
 }
 
