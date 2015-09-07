@@ -173,7 +173,7 @@ function loadProcess() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {
-            initializeProcessTable(jQuery.parseJSON(msg.d));
+            initializeProcessTable(jQuery.parseJSON(msg.d.replace(/[\r\n]/g, "")));
         }
     });
 }

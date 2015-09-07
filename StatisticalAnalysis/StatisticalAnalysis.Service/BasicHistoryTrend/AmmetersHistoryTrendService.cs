@@ -74,7 +74,7 @@ namespace StatisticalAnalysis.Service.BasicHistoryTrend
                                   
                                        UNION
                                   
-                                      SELECT CAST(NEWID() AS VARCHAR(64)) AS [KeyId], [AC].[OrganizationID] AS[OrganizationId], RTRIM([AC].[AmmeterName]) AS [Name], [AC].[ElectricRoom] AS [ParentKeyId], RTRIM([AC].[AmmeterName]) AS [VariableId], 'Ammeters' AS [LevelType], '" + factoryDatabase[0].ToString().Trim() + @".dbo.HistoryAmmeter' AS [TagTableName], RTRIM([AC].[ElectricEnergyFieldNameSave]) AS [TagColumnName]
+                                      SELECT CAST(NEWID() AS VARCHAR(64)) AS [KeyId], [AC].[OrganizationID] AS[OrganizationId], RTRIM([AC].[AmmeterName]) AS [Name], [AC].[ElectricRoom] AS [ParentKeyId], RTRIM([AC].[AmmeterName]) AS [VariableId], 'Ammeters' AS [LevelType], '" + factoryDatabase[0].ToString().Trim() + @".dbo.HistoryAmmeterIncrement' AS [TagTableName], RTRIM([AC].[ElectricEnergyFieldNameSave]) AS [TagColumnName]
                                         FROM [" + factoryDatabase[0].ToString().Trim() + @"].[dbo].[AmmeterContrast] AS [AC]
                                     ");
             }
