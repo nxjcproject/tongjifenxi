@@ -71,11 +71,12 @@ namespace StatisticalAnalysis.Service.BasicHistoryTrend
                 queryBuilder.Append("  UNION ");
                 queryBuilder.Append(@"SELECT DISTINCT [AC].[ElectricRoom] AS [KeyId], [AC].[OrganizationID] AS[OrganizationId], [AC].[ElectricRoom] AS [Name], [AC].[OrganizationID] AS [ParentKeyId], '' AS [VariableId], 'ElectricRoom' AS [LevelType], '' AS [TagTableName], '' AS [TagColumnName]
                                         FROM [" + factoryDatabase[0].ToString().Trim() + @"].[dbo].[AmmeterContrast] AS [AC]
-                                  
+                                  WHERE ElectricRoom is not null AND ElectricRoom<>''
                                        UNION
                                   
                                       SELECT CAST(NEWID() AS VARCHAR(64)) AS [KeyId], [AC].[OrganizationID] AS[OrganizationId], RTRIM([AC].[AmmeterName]) AS [Name], [AC].[ElectricRoom] AS [ParentKeyId], RTRIM([AC].[AmmeterName]) AS [VariableId], 'Ammeters' AS [LevelType], '" + factoryDatabase[0].ToString().Trim() + @".dbo.HistoryAmmeterIncrement' AS [TagTableName], RTRIM([AC].[ElectricEnergyFieldNameSave]) AS [TagColumnName]
                                         FROM [" + factoryDatabase[0].ToString().Trim() + @"].[dbo].[AmmeterContrast] AS [AC]
+                                  WHERE ElectricRoom is not null AND ElectricRoom<>''
                                     ");
             }
 
