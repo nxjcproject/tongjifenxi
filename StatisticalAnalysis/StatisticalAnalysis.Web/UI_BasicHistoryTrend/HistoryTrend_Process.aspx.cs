@@ -1,6 +1,7 @@
 ﻿using EasyUIJsonParser;
 using StatisticalAnalysis.Infrastruture.Utility;
 using StatisticalAnalysis.Service.BasicHistoryTrend;
+using StatisticalReport.Service.StatisticalReportServices;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -17,6 +18,17 @@ namespace StatisticalAnalysis.Web.UI_BasicHistoryTrend
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            ///以下是接收js脚本中post过来的参数
+            string m_FunctionName = Request.Form["myFunctionName"] == null ? "" : Request.Form["myFunctionName"].ToString();             //方法名称,调用后台不同的方法
+            string m_Parameter1 = Request.Form["myParameter1"] == null ? "" : Request.Form["myParameter1"].ToString();                   //方法的参数名称1
+            string m_Parameter2 = Request.Form["myParameter2"] == null ? "" : Request.Form["myParameter2"].ToString();                   //方法的参数名称2
+            if (m_FunctionName == "ExcelStream")
+            {
+                //ExportFile("xls", "导出报表1.xls");
+                string m_ExportTable = m_Parameter1.Replace("&lt;", "<");
+                m_ExportTable = m_ExportTable.Replace("&gt;", ">");
+                StatisticalReportHelper.ExportExcelFile("xls", m_Parameter2 + "综合对标数据.xls", m_ExportTable);
+            }
         }
 
         [WebMethod]

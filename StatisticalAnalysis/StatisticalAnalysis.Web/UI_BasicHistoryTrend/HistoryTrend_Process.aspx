@@ -17,6 +17,7 @@
     <link type="text/css" rel="stylesheet" href="/css/common/charts.css" />
     <link type="text/css" rel="stylesheet" href="/css/common/NormalPage.css" />
 
+    <script type="text/javascript" src="/js/common/PrintFile.js" charset="utf-8"></script> 
 
     <script type="text/javascript" src="/lib/ealib/jquery.min.js" charset="utf-8"></script>
     <script type="text/javascript" src="/lib/ealib/jquery.easyui.min.js" charset="utf-8"></script>
@@ -77,7 +78,9 @@
                             <table>
                                 <tr>
                                     <td style="height: 30px; text-align: left;">
-                                        <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="popupTagSelector();">添加</a>
+                                        <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="popupTagSelector();">添加</a>                                       
+                                    </td>
+                                    <td style="height: 30px; text-align: left;">                                   
                                         <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="clearTagItems();">清空</a>
                                     </td>
                                     <td>
@@ -85,6 +88,14 @@
                                     </td>
                                     <td>
                                         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="queryHistoryTrend();">查询</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" class="easyui-linkbutton" data-options="iconCls:'ext-icon-page_white_excel',plain:true" onclick="ExportFileFun();">导出</a>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="easyui-linkbutton" data-options="iconCls:'ext-icon-printer',plain:true" onclick="PrintFileFun();">打印</a>
                                     </td>
                                 </tr>
                             </table>

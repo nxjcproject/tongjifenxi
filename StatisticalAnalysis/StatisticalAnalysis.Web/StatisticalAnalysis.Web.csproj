@@ -50,6 +50,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\StatisticalAnalysis.Infrastruture\bin\Debug\StatisticalAnalysis.Infrastruture.dll</HintPath>
     </Reference>
+    <Reference Include="StatisticalReport.Service, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\StatisticalReport.Service.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -87,6 +91,7 @@
     <Content Include="js\common\components\WindowsDialog.js" />
     <Content Include="js\common\format\DateTimeFormat.js" />
     <Content Include="js\common\json2.min.js" />
+    <Content Include="js\common\PrintFile.js" />
     <Content Include="lib\ealib\changelog.txt" />
     <Content Include="lib\ealib\easyloader.js" />
     <Content Include="lib\ealib\easyui-lang-zh_CN.js" />

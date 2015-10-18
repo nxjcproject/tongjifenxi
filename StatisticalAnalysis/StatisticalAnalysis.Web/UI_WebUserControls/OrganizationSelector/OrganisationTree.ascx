@@ -28,7 +28,7 @@
     function loadOrganisationTree(myLoadType) {
         var m_Type = $('#combobox_OrganisationTree_ProductionTypeF').combobox('getValue');
         var m_FunctionName = "GetOrganisationTree";
-        var queryUrl = $('#TagsSelector_DcsTags_HiddenField_PageName').val();
+        var queryUrl = $('#OrganisationTree1_HiddenField_PageName').val();
         var m_Parmaters = { "myFunctionName": m_FunctionName, "myType": m_Type };
         $.ajax({
             type: "POST",
@@ -37,6 +37,7 @@
             //contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (msg) {
+                //alert("sadf");
                 if (myLoadType == 'first') {
                     initializeOrganisationTree(msg);
                 }
@@ -65,7 +66,7 @@
     }
     function LoadProductionType(myLoadType) {
         var m_FunctionName = "GetProductionLineType";
-        var queryUrl = $('#TagsSelector_DcsTags_HiddenField_PageName').val();
+        var queryUrl = $('#OrganisationTree1_HiddenField_PageName').val();
         var m_Parmaters = { "myFunctionName": m_FunctionName };
         $.ajax({
             type: "POST",

@@ -36,7 +36,7 @@ namespace StatisticalAnalysis.Service.BasicHistoryTrend
             SqlParameter[] parameters = new SqlParameter[]{
                 new SqlParameter("organizationId", organizationId)
             };
-
+            //DataTable table = dataFactory.Query(queryString, parameters);
             return dataFactory.Query(queryString, parameters);
         }
     }

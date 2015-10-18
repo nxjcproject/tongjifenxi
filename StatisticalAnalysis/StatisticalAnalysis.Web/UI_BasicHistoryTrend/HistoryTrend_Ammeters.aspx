@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="HistoryTrend_Ammeters.aspx.cs" Inherits="StatisticalAnalysis.Web.UI_BasicHistoryTrend.HistoryTrend_Ammeters" %>
+
 <%@ Register Src="~/UI_WebUserControls/OrganizationSelector/OrganisationTree.ascx" TagPrefix="uc1" TagName="OrganisationTree_ProductionLine" %>
 
 <!DOCTYPE html>
@@ -28,7 +29,7 @@
     <!--<script type="text/javascript" src="/lib/pllib/syntaxhighlighter/scripts/shCore.min.js"></script>
     <script type="text/javascript" src="/lib/pllib/syntaxhighlighter/scripts/shBrushJScript.min.js"></script>
     <script type="text/javascript" src="/lib/pllib/syntaxhighlighter/scripts/shBrushXml.min.js"></script>-->
-
+        <script type="text/javascript" src="/js/common/PrintFile.js" charset="utf-8"></script> 
     <!-- Additional plugins go here -->
     <script type="text/javascript" src="/lib/pllib/plugins/jqplot.barRenderer.min.js"></script>
     <script type="text/javascript" src="/lib/pllib/plugins/jqplot.pieRenderer.min.js"></script>
@@ -87,7 +88,9 @@
                             <table>
                                 <tr>
                                     <td style="height: 30px; text-align: left;">
-                                        <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="popupTagSelector();">添加</a>
+                                        <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="popupTagSelector();">添加</a>                                   
+                                    </td>
+                                    <td style="height: 30px; text-align: left;">
                                         <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="clearTagItems();">清空</a>
                                     </td>
                                     <td>
@@ -95,6 +98,14 @@
                                     </td>
                                     <td>
                                         <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="queryHistoryTrend();">查询</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" class="easyui-linkbutton" data-options="iconCls:'ext-icon-page_white_excel',plain:true" onclick="ExportFileFun();">导出</a>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="easyui-linkbutton" data-options="iconCls:'ext-icon-printer',plain:true" onclick="PrintFileFun();">打印</a>
                                     </td>
                                 </tr>
                             </table>
