@@ -19,7 +19,7 @@ namespace StatisticalAnalysis.Web.UI_ElectricityCostAnalysis
             {
 #if DEBUG
                 ////////////////////调试用,自定义的数据授权
-                List<string> m_DataValidIdItems = new List<string>() { "zc_nxjc_byc" };
+                List<string> m_DataValidIdItems = new List<string>() { "zc_nxjc_byc", "zc_nxjc_qtx_efc", "zc_nxjc_klqc_klqf" };
                 AddDataValidIdGroup("ProductionOrganization", m_DataValidIdItems);
 #elif RELEASE
 #endif
@@ -31,7 +31,7 @@ namespace StatisticalAnalysis.Web.UI_ElectricityCostAnalysis
 
 
         [WebMethod]
-        public static string GetElectricityPVFAnalysisChart(string organizationId, string analysisType, string startTime, string endTime)
+        public static string GetElectricityPVFAnalysisChart(string organizationId, string organizationName, string analysisType, string startTime, string endTime)
         {
             DateTime begin = DateTime.Parse(startTime);
             DateTime end = DateTime.Parse(endTime);
@@ -43,15 +43,15 @@ namespace StatisticalAnalysis.Web.UI_ElectricityCostAnalysis
             {
                 case "yearly":
                     xaxisLabel = "月";
-                    electricityPVFUsageTable = ElectricityPVFUsageAnalysisService.GetElectricityPVFUsageYearly(organizationId, end.Year);
+                    electricityPVFUsageTable = ElectricityPVFUsageAnalysisService.GetElectricityPVFUsageYearly(organizationId, organizationName, end.Year);
                     break;
                 case "monthly":
                     xaxisLabel = "月-日";
-                    electricityPVFUsageTable = ElectricityPVFUsageAnalysisService.GetElectricityPVFUsageMonthly(organizationId, end.Year, end.Month);
+                    electricityPVFUsageTable = ElectricityPVFUsageAnalysisService.GetElectricityPVFUsageMonthly(organizationId, organizationName, end.Year, end.Month);
                     break;
                 case "custom":
                     xaxisLabel = "年-月-日";
-                    electricityPVFUsageTable = ElectricityPVFUsageAnalysisService.GetElectricityPVFUsageCustom(organizationId, begin, end);
+                    electricityPVFUsageTable = ElectricityPVFUsageAnalysisService.GetElectricityPVFUsageCustom(organizationId, organizationName, begin, end);
                     break;
                 default:
                     break;
@@ -63,7 +63,7 @@ namespace StatisticalAnalysis.Web.UI_ElectricityCostAnalysis
                 colNames.Add(dc.ColumnName.ToString());
             }
 
-            return EasyUIJsonParser.ChartJsonParser.GetGridChartJsonString(electricityPVFUsageTable, colNames.ToArray(), new string[] { "峰期用电成本", "谷期用电成本", "平期用电成本" }, xaxisLabel, "元", 1);
+            return EasyUIJsonParser.ChartJsonParser.GetGridChartJsonString(electricityPVFUsageTable, colNames.ToArray(), new string[] { "峰期用电量", "谷期用电量", "平期用电量" }, xaxisLabel, "kWh", 1);
         }
     }
 }

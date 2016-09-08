@@ -170,44 +170,57 @@ namespace StatisticalAnalysis.Service.PlanAndActual
         {
             ////计算综合电耗、煤耗
             decimal Value = 0.0m;
-            Standard_GB16780_2012.Parameters_ComprehensiveData m_Parameters_ComprehensiveData = AutoSetParameters.AutoSetParameters_V1.SetComprehensiveParametersFromSql("month",
-                myDate, myDate, new List<string>() { myOrganizationId }, myDataFactory);
-            Standard_GB16780_2012.Function_EnergyConsumption_V1 m_Function_EnergyConsumption_V1 = new Standard_GB16780_2012.Function_EnergyConsumption_V1();
-            m_Function_EnergyConsumption_V1.LoadComprehensiveData(myActualMonthResultTable, m_Parameters_ComprehensiveData, "VariableId", "Value");
+            AutoSetParameters.AutoGetEnergyConsumptionRuntime_V1 m_AutoGetEnergyConsumption_V1 = new AutoSetParameters.AutoGetEnergyConsumptionRuntime_V1(new SqlServerDataAdapter.SqlServerDataFactory(ConnectionStringFactory.NXJCConnectionString));
+            DateTime m_StartTime = DateTime.Parse(myDate + "-01");
+            DateTime m_EndTime = m_StartTime.AddMonths(1).AddDays(-1);
 
-            if (myVariableId == "clinker_ElectricityConsumption_Comprehensive")              //熟料综合电耗
+            //Standard_GB16780_2012.Parameters_ComprehensiveData m_Parameters_ComprehensiveData = AutoSetParameters.AutoSetParameters_V1.SetComprehensiveParametersFromSql("month",
+            //    myDate, myDate, new List<string>() { myOrganizationId }, myDataFactory);
+            //Standard_GB16780_2012.Function_EnergyConsumption_V1 m_Function_EnergyConsumption_V1 = new Standard_GB16780_2012.Function_EnergyConsumption_V1();
+            //m_Function_EnergyConsumption_V1.LoadComprehensiveData(myActualMonthResultTable, m_Parameters_ComprehensiveData, "VariableId", "Value");
+            DataTable m_OrganizationLevelCodeTable = GetOrganizationInfo(myOrganizationId);
+            if (m_OrganizationLevelCodeTable != null && m_OrganizationLevelCodeTable.Rows.Count > 0)
             {
-                Value = m_Function_EnergyConsumption_V1.GetClinkerPowerConsumption();
-            }
-            else if(myVariableId == "clinker_CoalConsumption_Comprehensive")              //熟料综合煤耗
-            {
-                Value = m_Function_EnergyConsumption_V1.GetClinkerCoalConsumption();
-            }
-            else if (myVariableId == "clinker_EnergyConsumption_Comprehensive")              //熟料能耗电耗
-            {
-                decimal m_ClinkerElectricityConsumption = m_Function_EnergyConsumption_V1.GetClinkerPowerConsumption();
-                decimal m_ClinkerCoalConsumption = m_Function_EnergyConsumption_V1.GetClinkerCoalConsumption();
-                Value = m_Function_EnergyConsumption_V1.GetClinkerEnergyConsumption(m_ClinkerElectricityConsumption, m_ClinkerCoalConsumption);
-            }
-            else if (myVariableId == "cementmill_ElectricityConsumption_Comprehensive")              //水泥综合电耗
-            {
-                decimal m_ClinkerElectricityConsumption = m_Function_EnergyConsumption_V1.GetClinkerPowerConsumption();
-                Value = m_Function_EnergyConsumption_V1.GetCementPowerConsumption(m_ClinkerElectricityConsumption);
-            }
-            else if (myVariableId == "cementmill_CoalConsumption_Comprehensive")                   //水泥综合煤耗
-            {
-                decimal m_ClinkerCoalConsumption = m_Function_EnergyConsumption_V1.GetClinkerCoalConsumption();
-                Value = m_Function_EnergyConsumption_V1.GetCementCoalConsumption(m_ClinkerCoalConsumption);
-            }
-            else if (myVariableId == "cementmill_EnergyConsumption_Comprehensive")                //水泥综合能耗
-            {
-                decimal m_ClinkerElectricityConsumption = m_Function_EnergyConsumption_V1.GetClinkerPowerConsumption();
-                decimal m_CementmillElectricityConsumption = m_Function_EnergyConsumption_V1.GetCementPowerConsumption(m_ClinkerElectricityConsumption);
-                decimal m_ClinkerCoalConsumption = m_Function_EnergyConsumption_V1.GetClinkerCoalConsumption();
-                decimal m_CementmillCoalConsumption = m_Function_EnergyConsumption_V1.GetCementCoalConsumption(m_ClinkerCoalConsumption);
-                Value = m_Function_EnergyConsumption_V1.GetCementEnergyConsumption(m_CementmillElectricityConsumption, m_ClinkerCoalConsumption);
+                string m_OrganizationLevelCode = m_OrganizationLevelCodeTable.Rows[0]["LevelCode"].ToString();
+
+                if (myVariableId == "clinker_ElectricityConsumption_Comprehensive")              //熟料综合电耗
+                {
+                    Value = m_AutoGetEnergyConsumption_V1.GetClinkerPowerConsumptionWithFormula("day", m_StartTime.ToString("yyyy-MM-dd"), m_EndTime.ToString("yyyy-MM-dd"), m_OrganizationLevelCode).CaculateValue;
+                }
+                else if (myVariableId == "clinker_CoalConsumption_Comprehensive")              //熟料综合煤耗
+                {
+                    Value = m_AutoGetEnergyConsumption_V1.GetClinkerCoalConsumptionWithFormula("day", m_StartTime.ToString("yyyy-MM-dd"), m_EndTime.ToString("yyyy-MM-dd"), m_OrganizationLevelCode).CaculateValue;
+                }
+                else if (myVariableId == "clinker_EnergyConsumption_Comprehensive")              //熟料能耗电耗
+                {
+                    Value = m_AutoGetEnergyConsumption_V1.GetClinkerEnergyConsumptionWithFormula("day", m_StartTime.ToString("yyyy-MM-dd"), m_EndTime.ToString("yyyy-MM-dd"), m_OrganizationLevelCode).CaculateValue;
+                }
+                else if (myVariableId == "cementmill_ElectricityConsumption_Comprehensive")              //水泥综合电耗
+                {
+                    Value = m_AutoGetEnergyConsumption_V1.GetCementPowerConsumptionWithFormula("day", m_StartTime.ToString("yyyy-MM-dd"), m_EndTime.ToString("yyyy-MM-dd"), m_OrganizationLevelCode).CaculateValue;
+                }
+                else if (myVariableId == "cementmill_CoalConsumption_Comprehensive")                   //水泥综合煤耗
+                {
+                    Value = m_AutoGetEnergyConsumption_V1.GetCementCoalConsumptionWithFormula("day", m_StartTime.ToString("yyyy-MM-dd"), m_EndTime.ToString("yyyy-MM-dd"), m_OrganizationLevelCode).CaculateValue;
+                }
+                else if (myVariableId == "cementmill_EnergyConsumption_Comprehensive")                //水泥综合能耗
+                {
+                    Value = m_AutoGetEnergyConsumption_V1.GetCementEnergyConsumptionWithFormula("day", m_StartTime.ToString("yyyy-MM-dd"), m_EndTime.ToString("yyyy-MM-dd"), m_OrganizationLevelCode).CaculateValue;
+                }
             }
             return Value;
+        }
+        private static DataTable GetOrganizationInfo(string myOrganizationId)
+        {
+            string _connectionString = ConnectionStringFactory.NXJCConnectionString;
+            ISqlServerDataFactory _dataFactory = new SqlServerDataFactory(_connectionString);
+
+            string m_Sql = @"select A.LevelCode as LevelCode, A.LevelType as LevelType from system_Organization A
+                     where A.OrganizationID = @OrganizationID";
+            List<SqlParameter> m_Parameters = new List<SqlParameter>();
+            m_Parameters.Add(new SqlParameter("@OrganizationID", myOrganizationId));
+            DataTable table = _dataFactory.Query(m_Sql, m_Parameters.ToArray());
+            return table;
         }
     }
 }

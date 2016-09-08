@@ -70,13 +70,16 @@ namespace StatisticalAnalysis.Service.PlanAndActual
             planRow["项目指标"] = "计划";
             int startPlan = planTable.Columns.IndexOf("January");
             int startTarger = targetCompletionTable.Columns.IndexOf("1月");
-            for (int i = 0; i < 12; i++)
+            if (itemPlan.Length > 0)
             {
-                planRow[startTarger + i] = itemPlan[0][startPlan + i];
+                for (int i = 0; i < 12; i++)
+                {
+                    planRow[startTarger + i] = itemPlan[0][startPlan + i];
+                }
+                DataRow m_row = result.NewRow();
+                m_row.ItemArray = planRow.ItemArray;
+                result.Rows.Add(m_row);
             }
-            DataRow m_row = result.NewRow();
-            m_row.ItemArray = planRow.ItemArray;
-            result.Rows.Add(m_row);
             result.Columns.Remove("项目指标");
             result.Columns.Remove("类别");
             return result;

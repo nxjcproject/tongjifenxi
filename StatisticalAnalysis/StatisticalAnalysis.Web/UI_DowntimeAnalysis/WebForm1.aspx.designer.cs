@@ -7,10 +7,10 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace StatisticalAnalysis.Web {
+namespace StatisticalAnalysis.Web.UI_DowntimeAnalysis {
     
     
-    public partial class test {
+    public partial class WebForm1 {
         
         /// <summary>
         /// form1 控件。

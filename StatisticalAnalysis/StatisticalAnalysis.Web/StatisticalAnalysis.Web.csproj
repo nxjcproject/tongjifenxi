@@ -84,10 +84,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\common\charts.css" />
+    <Content Include="css\common\GanttChart.css" />
     <Content Include="css\common\NormalPage.css" />
     <Content Include="js\common\components\Charts.js" />
     <Content Include="js\common\components\DataGrid.js" />
+    <Content Include="js\common\components\GanttChart.js" />
     <Content Include="js\common\components\GridChart.js" />
+    <Content Include="js\common\components\PVFClock.js" />
     <Content Include="js\common\components\WindowsDialog.js" />
     <Content Include="js\common\format\DateTimeFormat.js" />
     <Content Include="js\common\json2.min.js" />
@@ -1609,12 +1612,21 @@
     <Content Include="UI_DowntimeAnalysis\ComprehensiveAnalysis.aspx" />
     <Content Include="UI_DowntimeAnalysis\css\page\DowntimeCountAnalysis.css" />
     <Content Include="UI_DowntimeAnalysis\css\page\ComprehensiveAnalysis.css" />
+    <Content Include="UI_DowntimeAnalysis\css\page\DowntimeHorizontallyAnalysis.css" />
+    <Content Include="UI_DowntimeAnalysis\css\page\DowntimeReasonAnalysis.css" />
     <Content Include="UI_DowntimeAnalysis\css\page\SimilarDowntimeAnalysis.css" />
     <Content Include="UI_DowntimeAnalysis\DowntimeCountAnalysis.aspx" />
+    <Content Include="UI_DowntimeAnalysis\DowntimeGanttAnalysis.aspx" />
+    <Content Include="UI_DowntimeAnalysis\DowntimeHorizontallyAnalysis.aspx" />
+    <Content Include="UI_DowntimeAnalysis\DowntimeReasonAnalysis.aspx" />
     <Content Include="UI_DowntimeAnalysis\js\page\DowntimeCountAnalysis.js" />
     <Content Include="UI_DowntimeAnalysis\js\page\ComprehensiveAnalysis.js" />
+    <Content Include="UI_DowntimeAnalysis\js\page\DowntimeGanttAnalysis.js" />
+    <Content Include="UI_DowntimeAnalysis\js\page\DowntimeHorizontallyAnalysis.js" />
+    <Content Include="UI_DowntimeAnalysis\js\page\DowntimeReasonAnalysis.js" />
     <Content Include="UI_DowntimeAnalysis\js\page\SimilarDowntimeAnalysis.js" />
     <Content Include="UI_DowntimeAnalysis\SimilarDowntimeAnalysis.aspx" />
+    <Content Include="UI_DowntimeAnalysis\WebForm1.aspx" />
     <Content Include="UI_ElectricityCostAnalysis\css\page\ElectricityPVFAnalysis.css" />
     <Content Include="UI_ElectricityCostAnalysis\css\page\ElectricityConsumptionAnalysis.css" />
     <Content Include="UI_ElectricityCostAnalysis\ElectricityConsumptionAnalysis.aspx" />
@@ -1692,12 +1704,40 @@
     <Compile Include="UI_DowntimeAnalysis\DowntimeCountAnalysis.aspx.designer.cs">
       <DependentUpon>DowntimeCountAnalysis.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UI_DowntimeAnalysis\DowntimeGanttAnalysis.aspx.cs">
+      <DependentUpon>DowntimeGanttAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI_DowntimeAnalysis\DowntimeGanttAnalysis.aspx.designer.cs">
+      <DependentUpon>DowntimeGanttAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI_DowntimeAnalysis\DowntimeHorizontallyAnalysis.aspx.cs">
+      <DependentUpon>DowntimeHorizontallyAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI_DowntimeAnalysis\DowntimeHorizontallyAnalysis.aspx.designer.cs">
+      <DependentUpon>DowntimeHorizontallyAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI_DowntimeAnalysis\DowntimeReasonAnalysis.aspx.cs">
+      <DependentUpon>DowntimeReasonAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI_DowntimeAnalysis\DowntimeReasonAnalysis.aspx.designer.cs">
+      <DependentUpon>DowntimeReasonAnalysis.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UI_DowntimeAnalysis\SimilarDowntimeAnalysis.aspx.cs">
       <DependentUpon>SimilarDowntimeAnalysis.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UI_DowntimeAnalysis\SimilarDowntimeAnalysis.aspx.designer.cs">
       <DependentUpon>SimilarDowntimeAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI_DowntimeAnalysis\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI_DowntimeAnalysis\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI_ElectricityCostAnalysis\ElectricityConsumptionAnalysis.aspx.cs">
       <DependentUpon>ElectricityConsumptionAnalysis.aspx</DependentUpon>

@@ -64,6 +64,9 @@
     <Compile Include="CoalCostAnalysis\CoalConsumptionAnalysisService.cs" />
     <Compile Include="DowntimeAnalysis\DowntimeComprehensiveAnalysisService.cs" />
     <Compile Include="DowntimeAnalysis\DowntimeCountAnalysisService.cs" />
+    <Compile Include="DowntimeAnalysis\DowntimeGanttAnalysis.cs" />
+    <Compile Include="DowntimeAnalysis\DowntimeHorizontallyAnalysis.cs" />
+    <Compile Include="DowntimeAnalysis\DowntimeReasonAnalysis.cs" />
     <Compile Include="ElectricityCostAnalysis\ElectricityConsumptionAnalysisService.cs" />
     <Compile Include="ElectricityCostAnalysis\ElectricityABCDAnalysisService.cs" />
     <Compile Include="ElectricityCostAnalysis\ElectricityPVFUsageAnalysisService.cs" />

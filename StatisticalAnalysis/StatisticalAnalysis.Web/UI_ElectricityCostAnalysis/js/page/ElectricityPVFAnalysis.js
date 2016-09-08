@@ -47,7 +47,7 @@ function query() {
     $('#' + windowID).empty();
     // 获取组织机构ID
     var organizationId = $('#organizationId').val();
-
+    var organizationName = $('#txtOrganization').textbox('getText');
     if (organizationId == '') {
         $.messager.alert('提示', '请先选择需要分析的组织机构。');
         return;
@@ -111,7 +111,7 @@ function query() {
     $.ajax({
         type: "POST",
         url: "ElectricityPVFAnalysis.aspx/GetElectricityPVFAnalysisChart",
-        data: "{organizationId:'" + organizationId + "',analysisType:'" + analysisType + "',startTime:'" + startTime + "',endTime:'" + endTime + "'}",
+        data: "{organizationId:'" + organizationId + "',analysisType:'" + analysisType + "',startTime:'" + startTime + "',endTime:'" + endTime + "',organizationName:'"+organizationName+"'}",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {
