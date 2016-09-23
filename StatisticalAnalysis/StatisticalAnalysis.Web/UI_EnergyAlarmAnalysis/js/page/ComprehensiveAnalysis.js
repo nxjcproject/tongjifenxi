@@ -57,7 +57,8 @@ function query() {
     // 获取起止时间段
     var startTime = $('#StartTime').datebox('getValue');
     var endTime = $('#EndTime').datebox('getValue');
-
+    var m_StartTimeString = "";
+    var m_EndTimeString = "";
     // 获取分析类型
     var analysisType = $("input[name='analysisType']:checked").val();
 
@@ -74,9 +75,6 @@ function query() {
             endTime.setHours(23, 59, 59, 999);
             startTime = new Date(endTime.getFullYear(), 0, 1);
             startTime.setHours(00, 00, 00, 000);
-
-            startTime = startTime.toLocaleString();
-            endTime = endTime.toLocaleString();
             break;
 
             // 如果是月分析
@@ -92,8 +90,6 @@ function query() {
             startTime.setFullYear(endTime.getFullYear(), endTime.getMonth(), 1);
             startTime.setHours(00, 00, 00, 000);
 
-            startTime = startTime.toLocaleString();
-            endTime = endTime.toLocaleString();
             break;
 
             // 如果是自定义，则
@@ -107,15 +103,14 @@ function query() {
             startTime = new Date(arrayStart[0], arrayStart[1] - 1, arrayStart[2]);
             endTime.setHours(23, 59, 59, 999);
             startTime.setHours(00, 00, 00, 000);
-            startTime = startTime.toLocaleString();
-            endTime = endTime.toLocaleString();
             break;
     }
-
+    m_StartTimeString = startTime.getFullYear() + "-" + parseInt(startTime.getMonth() + 1) + "-" + startTime.getDate() + " " + startTime.getHours() + ":" + startTime.getMinutes() + ":" + +startTime.getSeconds();
+    m_EndTimeString = endTime.getFullYear() + "-" + parseInt(endTime.getMonth() + 1) + "-" + endTime.getDate() + " " + endTime.getHours() + ":" + endTime.getMinutes() + ":" + +endTime.getSeconds();
     $.ajax({
         type: "POST",
         url: "ComprehensiveAnalysis.aspx/GetAlarmCount",
-        data: "{organizationId:'" + organizationId + "',startTime:'" + startTime + "',endTime:'" + endTime + "'}",
+        data: "{organizationId:'" + organizationId + "',startTime:'" + m_StartTimeString + "',endTime:'" + m_EndTimeString + "'}",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {
@@ -126,7 +121,7 @@ function query() {
     $.ajax({
         type: "POST",
         url: "ComprehensiveAnalysis.aspx/GetAlarmChart",
-        data: "{organizationId:'" + organizationId + "',startTime:'" + startTime + "',endTime:'" + endTime + "'}",
+        data: "{organizationId:'" + organizationId + "',startTime:'" + m_StartTimeString + "',endTime:'" + m_EndTimeString + "'}",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {       
@@ -137,7 +132,7 @@ function query() {
     $.ajax({
         type: "POST",
         url: "ComprehensiveAnalysis.aspx/GetReportData",
-        data: "{organizationId:'" + organizationId + "',startTime:'" + startTime + "',endTime:'" + endTime + "'}",
+        data: "{organizationId:'" + organizationId + "',startTime:'" + m_StartTimeString + "',endTime:'" + m_EndTimeString + "'}",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {

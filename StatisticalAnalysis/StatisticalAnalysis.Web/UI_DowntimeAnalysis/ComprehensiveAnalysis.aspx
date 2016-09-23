@@ -112,7 +112,7 @@
                 </div>
                 <!-- 图表结束 -->
                 <!--报表开始-->
-                <div class="easyui-panel"  data-options="region:'south',title:'报警详细信息', border:true, collapsible:true, split:false" style="height:150px;">
+                <div class="easyui-panel"  data-options="region:'south',title:'报警详细信息', border:true, collapsible:true, split:false" style="height:170px;">
                     <table id="Windows_Report"></table>
                 </div>
                 <!--报表结束-->
