@@ -66,7 +66,10 @@ function query() {
 
     // 获取分析类型
     var analysisType = $("input[name='analysisType']:checked").val();
-
+    var win = $.messager.progress({
+        title: '请稍后',
+        msg: '数据载入中...'
+    });
     $.ajax({
         type: "POST",
         url: "CementCostAnalysis.aspx/GetCementCostAnalysisChart",
@@ -74,7 +77,11 @@ function query() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {
+            $.messager.progress('close');
             updateChart(JSON.parse(msg.d));
+        },
+        beforeSend: function (XMLHttpRequest) {
+            win;
         }
     });
 }
@@ -98,8 +105,11 @@ function updateChart(data) {
     }
     CloseAllWindows();
 
-    var m_Postion = GetWindowPostion(0, m_WindowContainerId);
-    WindowsDialogOpen(data, m_WindowContainerId, true, imageType, m_Postion[0], m_Postion[1], m_Postion[2], m_Postion[3], false, m_Maximizable, m_Maximized);
+    /////////////////////显示图表///////////////////////
+    var m_ContainerObj = $('#Windows_Container');
+    var m_ContainerObjWidth = m_ContainerObj.width();
+    var m_ContainerObjHeight = m_ContainerObj.height();
+    WindowsDialogOpen(m_WindowContainerId, data, m_ContainerObjWidth, m_ContainerObjHeight);
 }
 
 // 获取月份的最后一天
@@ -153,16 +163,15 @@ function GetWindowPostion(myWindowIndex, myWindowContainerId) {
 
     return [m_Width, m_Height, m_Left, m_Top]
 }
-///////////////////////////////////////////打开window窗口//////////////////////////////////////////
-function WindowsDialogOpen(myData, myContainerId, myIsShowGrid, myChartType, myWidth, myHeight, myLeft, myTop, myDraggable, myMaximizable, myMaximized) {
-    ;
-    var m_WindowId = OpenWindows(myContainerId, '数据分析', myWidth, myHeight, myLeft, myTop, myDraggable, myMaximizable, myMaximized); //弹出windows
-    windowID = m_WindowId;
-    var m_WindowObj = $('#' + m_WindowId);
-    if (myMaximized != true) {
-        CreateGridChart(myData, m_WindowId, myIsShowGrid, myChartType);               //生成图表
-    }
 
+///////////////////////////////////////////打开window窗口//////////////////////////////////////////
+function WindowsDialogOpen(myContainerId, myData, myWidth, myHeight) {
+    var m_WindowId = OpenWindows(myContainerId, '单位产品用电量分析', myWidth, myHeight); //弹出windows
+    var m_WindowObj = $('#' + m_WindowId);
+    CreateGridChart(myData, m_WindowId, true, "DateXLine");               //生成图表
+    //if (myMaximized != true) {
+    //    ChangeSize(m_WindowId);
+    //}
     m_WindowObj.window({
         onBeforeClose: function () {
             ///////////////////////释放图形空间///////////////
@@ -173,13 +182,13 @@ function WindowsDialogOpen(myData, myContainerId, myIsShowGrid, myChartType, myW
         onMaximize: function () {
             TopWindow(m_WindowId);
             ChangeSize(m_WindowId);
-            CreateGridChart(myData, m_WindowId, myIsShowGrid, myChartType);
+            //CreateGridChart(myData, m_WindowId, myIsShowGrid, myChartType);
 
         },
         onRestore: function () {
             //TopWindow(m_WindowId);
             ChangeSize(m_WindowId);
-            CreateGridChart(myData, m_WindowId, myIsShowGrid, myChartType);
+            //CreateGridChart(myData, m_WindowId, myIsShowGrid, myChartType);
         }
     });
 }

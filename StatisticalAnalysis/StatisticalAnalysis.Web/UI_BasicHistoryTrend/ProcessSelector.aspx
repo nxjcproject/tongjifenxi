@@ -79,7 +79,10 @@
             var organizationId = $('#organizationId').val();
             var queryUrl = 'ProcessSelector.aspx/GetProcessWithTreeGridFormat';
             var dataToSend = '{organizationId: "' + organizationId + '"}';
-
+            var win = $.messager.progress({
+                title: '请稍后',
+                msg: '数据载入中...'
+            });
             $.ajax({
                 type: "POST",
                 url: queryUrl,
@@ -87,8 +90,12 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (msg) {
+                    $.messager.progress('close');
                     initializeProcessTable(jQuery.parseJSON(msg.d));
-                }
+                },
+                beforeSend: function (XMLHttpRequest) {
+                win;
+            }
             });
         }
 
@@ -103,7 +110,7 @@
 
 <body class="easyui-layout" data-options="fit:true,border:false">
     <!-- 左侧组织机构目录树开始 -->
-    <div data-options="region:'west',border:false" style="width: 210px;">
+    <div data-options="region:'west',border:false" style="width: 150px;">
         <uc1:OrganisationTree_ProductionLine runat="server" ID="OrganisationTree_ProductionLine" />
     </div>
     <!-- 左侧组织机构目录树结束 -->

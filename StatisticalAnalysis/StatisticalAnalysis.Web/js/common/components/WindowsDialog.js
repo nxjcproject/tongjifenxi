@@ -1,10 +1,45 @@
 ﻿var WindowsObjArray = new Array();
 var MaxWindowsCount = 8;
+var DialogChartOptionsId = "";
 $(document).ready(function () {
     for (var i = 0; i < MaxWindowsCount; i++) {
         WindowsObjArray.push("");
     }
+    InitializingChartAxesValue();
+    getbrowser();          //获得浏览器名称和型号
 });
+function InitializingChartAxesValue() {
+    var m_DlgHtml = '<div id="dlg_ChartAxesValueY" class="easyui-dialog" data-options="iconCls:\'icon-edit\',resizable:false,modal:true" style = "padding-top:5px;">' +
+        '<table style="width: 100%;">' +
+            '<tr>' +
+                '<th style="width:65px;height: 30px;">最小量程</th>' +
+                '<td style="width:90px;">' +
+                    '<input id="MinAxesValueY" class="easyui-numberbox" data-options="required:false, min:-10000000, max:100000000, value:0,precision:2" style="width: 80px" />' +
+                '</td>' +
+                '<th style="width:65px;">最大量程</th>' +
+                '<td style="width:90px;">' +
+                    '<input id="MaxAxesValueY" class="easyui-numberbox" data-options="required:false, min:-100000000, max:100000000, value:100,precision:2" style="width: 80px" />' +
+                '</td>' +
+                '<td style="width:65px;">' +
+                    '<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:\'icon-reload\'" onclick="ConfirmChartOptionsChange();">刷新</a>' +
+                '</td>' +
+            '</tr>' +
+        '</table>' +
+    '</div>';
+    $(document.body).append(m_DlgHtml);
+    $('#dlg_ChartAxesValueY').dialog({
+        title: '修改趋势量程',
+        width: 390,
+        height: 80,
+        closed: true,
+        cache: false,
+        modal: true,
+    });
+    $.parser.parse($('#dlg_ChartAxesValueY'));
+}
+function ConfirmChartOptionsChange() {
+    setChartAxesValueY("dlg_ChartAxesValueY", DialogChartOptionsId, $('#MinAxesValueY').numberbox('getValue'), $('#MaxAxesValueY').numberbox('getValue'));
+}
 function OpenWindows(myParentObjId, myTitle, myWidth, myHeight, myLeft, myTop, myDraggable, myMaximizable, myMaximized, myResizable) {
     if (arguments.length == 9) {
         myResizable = false;
@@ -17,7 +52,7 @@ function OpenWindows(myParentObjId, myTitle, myWidth, myHeight, myLeft, myTop, m
         var m_WindowsId = 'Windows' + m_WindowArrayIndex;
 
         //var m_HtmlString = '<div id="' + m_WindowsId + '" class="easyui-window" title="' + myTitle + '" data-options="iconCls:\'icon-save\'" style="width:' + myWidth + 'px;height:' + myHeight + 'px;padding:10px;"></div>';
-        var m_HtmlString = '<div id = "' + m_WindowsId + '"></div>';
+        var m_HtmlString = '<div id = "' + m_WindowsId + '" style = "overflow:hidden; text-align:center;"><div id = "' + m_WindowsId + '_CustomTools"><a href="javascript:void(0)" class="icon-edit" onclick = "OpenChartAxesValueDialog(\'' + m_WindowsId + '\')"></a></div></div>';
         $('#' + myParentObjId).append(m_HtmlString);                    //添加一个window
 
         CreateWindow(m_WindowsId, m_Title, myWidth, myHeight, myLeft, myTop, myDraggable, myMaximizable, myMaximized, myResizable);
@@ -30,7 +65,11 @@ function OpenWindows(myParentObjId, myTitle, myWidth, myHeight, myLeft, myTop, m
         return "";
     }
 }
-
+function OpenChartAxesValueDialog(myWindowsId)
+{
+    DialogChartOptionsId =  myWindowsId + '_Chart';
+    $('#dlg_ChartAxesValueY').dialog('open');
+}
 function CreateWindow(myWindowId, myTitle, myWidth, myHeight) {
     $('#' + myWindowId).window({   
         width: myWidth,
@@ -42,8 +81,8 @@ function CreateWindow(myWindowId, myTitle, myWidth, myHeight) {
         resizable: false,
         inline: true,
         iconCls: 'ext-icon-chart_bar',
-        padding: 10
-
+        padding: 10,
+        tools: '#' + myWindowId + '_CustomTools'
         //modal:true  
     }); 
 }
@@ -60,7 +99,8 @@ function CreateWindow(myWindowId, myTitle, myWidth, myHeight, myLeft, myTop) {
         resizable: false,
         inline: true,
         iconCls: 'ext-icon-chart_bar',
-        padding: 10
+        padding: 10,
+        tools: '#' + myWindowId + '_CustomTools'
 
         //modal:true  
     });
@@ -79,8 +119,8 @@ function CreateWindow(myWindowId, myTitle, myWidth, myHeight, myLeft, myTop, myD
         draggable: myDraggable,
         maximizable: myMaximizable, 
         iconCls: 'ext-icon-chart_bar',
-        padding: 10
-
+        padding: 10,
+        tools: '#' + myWindowId + '_CustomTools'
         //modal:true  
     });
 }
@@ -89,22 +129,22 @@ function CreateWindow(myWindowId, myTitle, myWidth, myHeight, myLeft, myTop, myD
     if (arguments.length == 9) {
         myResizable = false;
     }
-
     $('#' + myWindowId).window({
         width: myWidth,
         height: myHeight,
         title: myTitle,
-        left: myLeft,
-        top: myTop,
+        left: myLeft != undefined ? myLeft : 0,
+        top: myTop != undefined ? myTop : 0,
         collapsible: false,
         minimizable: false,
-        resizable: myResizable,
+        resizable: myResizable != undefined ? myResizable : false,
         inline: true,
-        draggable: myDraggable,
-        maximizable: myMaximizable,
-        maximized: myMaximized,
+        draggable: myDraggable != undefined ? myDraggable : false,
+        maximizable: myMaximizable != undefined ? myMaximizable : false,
+        maximized: myMaximized != undefined ? myMaximized : false,
         iconCls: 'ext-icon-chart_bar',
-        padding: 10
+        padding: 10,
+        tools: '#' + myWindowId + '_CustomTools'
 
         //modal:true  
     });

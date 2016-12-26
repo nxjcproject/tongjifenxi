@@ -146,7 +146,11 @@ function query() {
     var startTime = $("#StartTime").datetimebox('getValue');
     var endTime = $("#EndTime").datetimebox('getValue');
     var myURL = "HorizontallyMachineHaltAnalysis.aspx/GetMachineHaltCount";
-    var sendData = '{levelCodeString:"' + g_labelList + '",startTime:"' + startTime + '",endTime:"' + endTime + '",labelLength:"' + g_labelLengh + '",type:"' + g_type + '",reason:"'+g_reason + '"}';
+    var sendData = '{levelCodeString:"' + g_labelList + '",startTime:"' + startTime + '",endTime:"' + endTime + '",labelLength:"' + g_labelLengh + '",type:"' + g_type + '",reason:"' + g_reason + '"}';
+    var win = $.messager.progress({
+        title: '请稍后',
+        msg: '数据载入中...'
+    });
     $.ajax({
         type: "POST",
         url: myURL,
@@ -154,6 +158,7 @@ function query() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {
+            $.messager.progress('close');
             var myData = JSON.parse(msg.d);
             var count = g_labelList.length;
             for (var i = 0; i < count; i++) {
@@ -168,6 +173,9 @@ function query() {
                 myData['columns'][i + 1]['width'] = 150;
             }
             updateGridChart(myData);
+        },
+        beforeSend: function (XMLHttpRequest) {
+            win;
         }
     });
 }
@@ -200,6 +208,7 @@ function updateChart(myData) {
     //g_plot1.destroy();
     g_plot1 = jQuery.jqplot('ChartId', [chartData],
     {
+        seriesColors: ["#62fcf1", "#ff7471", "#fdf39d", "#8def77", "#4da5fe", "#7f82ec", "#eb3e68", "#f8a659", "#249090", "#fe9af6", "#e1e1e3", "#a6a6a7"],
         seriesDefaults: {
             // Make this a pie chart.
             renderer: jQuery.jqplot.PieRenderer,

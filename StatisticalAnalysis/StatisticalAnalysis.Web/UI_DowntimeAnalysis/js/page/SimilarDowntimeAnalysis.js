@@ -111,13 +111,20 @@ function updateChart(data) {
         IsFirstLoadChart = false;
     }
     else {
-        ReleaseGridChartObj(m_WindowContainerId);
+        var m_WindowsIdArray = GetWindowsIdArray();
+        for (var i = 0; i < m_WindowsIdArray.length; i++) {
+            if (m_WindowsIdArray[i] != "") {
+                ReleaseAllGridChartObj(m_WindowsIdArray[i]);
+            }
+        }
+        CloseAllWindows();
     }
 
-    CloseAllWindows();
-
-    var m_Postion = GetWindowPostion(0, m_WindowContainerId);
-    WindowsDialogOpen(data, m_WindowContainerId, false, imageType, m_Postion[0], m_Postion[1], m_Postion[2], m_Postion[3], false, m_Maximizable, m_Maximized);
+    /////////////////////显示图表///////////////////////
+    var m_ContainerObj = $('#Windows_Container');
+    var m_ContainerObjWidth = m_ContainerObj.width();
+    var m_ContainerObjHeight = m_ContainerObj.height();
+    WindowsDialogOpen(m_WindowContainerId, data, m_ContainerObjWidth, m_ContainerObjHeight, imageType);
 }
 
 // 获取停机原因
@@ -219,6 +226,36 @@ function WindowsDialogOpen(myData, myContainerId, myIsShowGrid, myChartType, myW
             //TopWindow(m_WindowId);
             ChangeSize(m_WindowId);
             CreateGridChart(myData, m_WindowId, myIsShowGrid, myChartType);
+        }
+    });
+}
+
+///////////////////////////////////////////打开window窗口//////////////////////////////////////////
+function WindowsDialogOpen(myContainerId, myData, myWidth, myHeight, myImageType) {
+    var m_WindowId = OpenWindows(myContainerId, '数据分析', myWidth, myHeight); //弹出windows
+    windowID = m_WindowId;
+    var m_WindowObj = $('#' + m_WindowId);
+    CreateGridChart(myData, m_WindowId, true, myImageType);               //生成图表
+    //if (myMaximized != true) {
+    //    ChangeSize(m_WindowId);
+    //}
+    m_WindowObj.window({
+        onBeforeClose: function () {
+            ///////////////////////释放图形空间///////////////
+            //var m_ContainerId = GetWindowIdByObj($(this));
+            ReleaseGridChartObj(m_WindowId);
+            CloseWindow($(this))
+        },
+        onMaximize: function () {
+            TopWindow(m_WindowId);
+            ChangeSize(m_WindowId);
+            //CreateGridChart(myData, m_WindowId, myIsShowGrid, myChartType);
+
+        },
+        onRestore: function () {
+            //TopWindow(m_WindowId);
+            ChangeSize(m_WindowId);
+            //CreateGridChart(myData, m_WindowId, myIsShowGrid, myChartType);
         }
     });
 }

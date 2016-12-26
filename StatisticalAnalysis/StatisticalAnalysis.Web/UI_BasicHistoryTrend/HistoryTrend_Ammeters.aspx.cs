@@ -21,7 +21,7 @@ namespace StatisticalAnalysis.Web.UI_BasicHistoryTrend
             {
                 ////////////////////调试用,自定义的数据授权
 #if DEBUG
-                List<string> m_DataValidIdItems = new List<string>() { "zc_nxjc_qtx_tys" };
+                List<string> m_DataValidIdItems = new List<string>() { "zc_nxjc_qtx_tys", "zc_nxjc_byc_byf" };
                 AddDataValidIdGroup("ProductionOrganization", m_DataValidIdItems);
 #elif RELEASE
 #endif
@@ -128,8 +128,8 @@ namespace StatisticalAnalysis.Web.UI_BasicHistoryTrend
         public static string GetAmmetersTreeGridFormat(string organizationId)
         {
             DataTable dt = AmmetersHistoryTrendService.GetAmmetersByOrganizationId(organizationId);
-
-            return EasyUIJsonParser.TreeGridJsonParser.DataTableToJson(dt, "KeyId", "Name", "ParentKeyId", "0", new string[] { "OrganizationId", "TagTableName", "TagColumnName", "LevelType", "Name", "VariableId" });
+            string m_ReturnValueString = EasyUIJsonParser.TreeGridJsonParser.DataTableToJson(dt, "KeyId", "Name", "ParentKeyId", "0", new string[] { "OrganizationId", "TagTableName", "TagColumnName", "LevelType", "Name", "VariableId" });
+            return m_ReturnValueString;
         }
     }
 }

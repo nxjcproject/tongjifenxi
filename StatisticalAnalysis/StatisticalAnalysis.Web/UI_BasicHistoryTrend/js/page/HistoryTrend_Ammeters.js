@@ -53,7 +53,10 @@ function queryHistoryTrend() {
     }
 
     var m_TagInfoJson = JSON.stringify(m_TagInfoObject);
-
+    var win = $.messager.progress({
+        title: '请稍后',
+        msg: '数据载入中...'
+    });
     $.ajax({
         type: "POST",
         url: "HistoryTrend_Ammeters.aspx/GetChartDataJson",
@@ -61,6 +64,7 @@ function queryHistoryTrend() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {
+            $.messager.progress('close');
             var m_MsgData = jQuery.parseJSON(msg.d);
 
             if (m_MsgData == null || m_MsgData == undefined || m_MsgData == NaN) {
@@ -77,10 +81,23 @@ function queryHistoryTrend() {
                 IsFirstLoadChart = false;
             }
             else {
-                ReleaseGridChartObj(m_WindowContainerId);
+                var m_WindowsIdArray = GetWindowsIdArray();
+                for (var i = 0; i < m_WindowsIdArray.length; i++) {
+                    if (m_WindowsIdArray[i] != "") {
+                        ReleaseAllGridChartObj(m_WindowsIdArray[i]);
+                    }
+                }
+                CloseAllWindows();
             }
 
-            CreateGridChart(m_MsgData, m_WindowContainerId, true, "DateXLine");
+            /////////////////////显示图表///////////////////////
+            var m_ContainerObj = $('#Windows_Container');
+            var m_ContainerObjWidth = m_ContainerObj.width();
+            var m_ContainerObjHeight = m_ContainerObj.height();
+            WindowsDialogOpen(m_WindowContainerId, m_MsgData, m_ContainerObjWidth, m_ContainerObjHeight);
+        },
+        beforeSend: function (XMLHttpRequest) {
+            win;
         }
     });
 }
@@ -230,4 +247,34 @@ function ExportFileFun() {
 function PrintFileFun() {
     var m_ReportTableHtml = GetDataGridTableHtml("Windows_Container_Grid", "综合对标数据", SelectDatetime);
     PrintHtml(m_ReportTableHtml);
+}
+
+
+///////////////////////////////////////////打开window窗口//////////////////////////////////////////
+function WindowsDialogOpen(myContainerId, myData, myWidth, myHeight) {
+    var m_WindowId = OpenWindows(myContainerId, '电表数据分析', myWidth, myHeight); //弹出windows
+    var m_WindowObj = $('#' + m_WindowId);
+    CreateGridChart(myData, m_WindowId, true, "DateXLine");               //生成图表
+    //if (myMaximized != true) {
+    //    ChangeSize(m_WindowId);
+    //}
+    m_WindowObj.window({
+        onBeforeClose: function () {
+            ///////////////////////释放图形空间///////////////
+            //var m_ContainerId = GetWindowIdByObj($(this));
+            ReleaseGridChartObj(m_WindowId);
+            CloseWindow($(this))
+        },
+        onMaximize: function () {
+            TopWindow(m_WindowId);
+            ChangeSize(m_WindowId);
+            //CreateGridChart(myData, m_WindowId, myIsShowGrid, myChartType);
+
+        },
+        onRestore: function () {
+            //TopWindow(m_WindowId);
+            ChangeSize(m_WindowId);
+            //CreateGridChart(myData, m_WindowId, myIsShowGrid, myChartType);
+        }
+    });
 }

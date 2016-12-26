@@ -34,13 +34,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoSetParameters">
-      <HintPath>..\..\..\组件\StandardCalculation\AutoSetParameters\bin\Debug\AutoSetParameters.dll</HintPath>
+      <HintPath>E:\git仓库\yuangongkaohe\StaffAssessment\StaffAssessment.Web\bin\AutoSetParameters.dll</HintPath>
     </Reference>
     <Reference Include="SqlServerDataAdapter">
       <HintPath>..\Lib\SqlServerDataAdapter.dll</HintPath>
     </Reference>
     <Reference Include="Standard_GB16780-2012">
-      <HintPath>..\..\..\组件\StandardCalculation\Standard_GB16780-2012\bin\Release\Dotfuscated\Standard_GB16780-2012.dll</HintPath>
+      <HintPath>E:\git仓库\yuangongkaohe\StaffAssessment\StaffAssessment.Web\bin\Standard_GB16780-2012.dll</HintPath>
     </Reference>
     <Reference Include="StatisticalReport.Infrastructure">
       <HintPath>..\Lib\StatisticalReport.Infrastructure.dll</HintPath>

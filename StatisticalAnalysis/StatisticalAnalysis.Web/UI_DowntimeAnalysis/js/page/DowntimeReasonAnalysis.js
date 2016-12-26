@@ -137,6 +137,10 @@ function query() {
         alert("请请选择原因类型!");
     }
     else {
+        var win = $.messager.progress({
+            title: '请稍后',
+            msg: '数据载入中...'
+        });
         $.ajax({
             type: "POST",
             url: "DowntimeReasonAnalysis.aspx/GetHaltReasonStaticsChart",
@@ -145,6 +149,7 @@ function query() {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (msg) {
+                $.messager.progress('close');
                 var m_MsgData = jQuery.parseJSON(msg.d);
                 if (m_MsgData != null && m_MsgData != undefined) {
                     if (m_MsgData["rows"] != null && m_MsgData["rows"] != undefined) {
@@ -177,6 +182,9 @@ function query() {
                 //    m_BarChartHtml = m_BarChartHtml + '</table>';
                 //    $('#BarChart').html(m_BarChartHtml);
                 //}
+            },
+            beforeSend: function (XMLHttpRequest) {
+                win;
             }
         });
     }

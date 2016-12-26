@@ -71,7 +71,10 @@ function Query() {
 
     // 获取分析类型
     var analysisType = $("input[name='analysisType']:checked").val();
-
+    var win = $.messager.progress({
+        title: '请稍后',
+        msg: '数据载入中...'
+    });
     $.ajax({
         type: "POST",
         url: "ElectricityConsumptionAnalysis.aspx/GetElectricityConsumptionAnalysisChart",
@@ -79,7 +82,11 @@ function Query() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {
+            $.messager.progress('close');
             updateChart(JSON.parse(msg.d));
+        },
+        beforeSend: function (XMLHttpRequest) {
+            win;
         }
     });
 }
@@ -92,9 +99,6 @@ function updateChart(data) {
     var imageType = $('#imageType').combobox('getValue');
 
     var m_WindowContainerId = 'Windows_Container';
-    var m_Maximizable = false;
-    var m_Maximized = true;
-
     var m_WindowsIdArray = GetWindowsIdArray();
     for (var i = 0; i < m_WindowsIdArray.length; i++) {
         if (m_WindowsIdArray[i] != "") {
@@ -103,8 +107,11 @@ function updateChart(data) {
     }
     CloseAllWindows();
 
-    var m_Postion = GetWindowPostion(0, m_WindowContainerId);
-    WindowsDialogOpen(data, m_WindowContainerId, true, imageType, m_Postion[0], m_Postion[1], m_Postion[2], m_Postion[3], false, m_Maximizable, m_Maximized);
+    /////////////////////显示图表///////////////////////
+    var m_ContainerObj = $('#Windows_Container');
+    var m_ContainerObjWidth = m_ContainerObj.width();
+    var m_ContainerObjHeight = m_ContainerObj.height();
+    WindowsDialogOpen(m_WindowContainerId, data, m_ContainerObjWidth, m_ContainerObjHeight, imageType);
 }
 
 // 获取月份的最后一天
@@ -126,48 +133,15 @@ function getLastDayOfMonth(year, month) {
     return lastDayOfMonth.getDate();
 }
 
-
-///////////////////////获取window初始位置////////////////////////////
-function GetWindowPostion(myWindowIndex, myWindowContainerId) {
-    var m_ParentObj = $('#' + myWindowContainerId);
-    var m_ParentWidth = m_ParentObj.width();
-    var m_ParentHeight = m_ParentObj.height();
-    var m_ZeroLeft = 0;
-    var m_ZeroTop = 0;
-    var m_Padding = 5;
-    var m_Width = (m_ParentWidth - m_Padding) / 2;
-    var m_Height = (m_ParentHeight - m_Padding) / 2;
-    var m_Left = 0;
-    var m_Top = 0;
-    if (myWindowIndex == 0) {
-        m_Left = m_ZeroLeft;
-        m_Top = m_ZeroTop;
-    }
-    else if (myWindowIndex == 1) {
-        m_Left = m_ZeroLeft + m_Width + m_Padding;
-        m_Top = m_ZeroTop;
-    }
-    else if (myWindowIndex == 2) {
-        m_Left = m_ZeroLeft;
-        m_Top = m_ZeroTop + m_Height + m_Padding;
-    }
-    else if (myWindowIndex == 3) {
-        m_Left = m_ZeroLeft + m_Width + m_Padding;
-        m_Top = m_ZeroTop + m_Height + m_Padding;
-    }
-
-    return [m_Width, m_Height, m_Left, m_Top]
-}
 ///////////////////////////////////////////打开window窗口//////////////////////////////////////////
-function WindowsDialogOpen(myData, myContainerId, myIsShowGrid, myChartType, myWidth, myHeight, myLeft, myTop, myDraggable, myMaximizable, myMaximized) {
-    ;
-    var m_WindowId = OpenWindows(myContainerId, '数据分析', myWidth, myHeight, myLeft, myTop, myDraggable, myMaximizable, myMaximized); //弹出windows
+function WindowsDialogOpen(myContainerId, myData, myWidth, myHeight, myImageType) {
+    var m_WindowId = OpenWindows(myContainerId, '数据分析', myWidth, myHeight); //弹出windows
     windowID = m_WindowId;
     var m_WindowObj = $('#' + m_WindowId);
-    if (myMaximized != true) {
-        CreateGridChart(myData, m_WindowId, myIsShowGrid, myChartType);               //生成图表
-    }
-
+    CreateGridChart(myData, m_WindowId, true, myImageType);               //生成图表
+    //if (myMaximized != true) {
+    //    ChangeSize(m_WindowId);
+    //}
     m_WindowObj.window({
         onBeforeClose: function () {
             ///////////////////////释放图形空间///////////////
@@ -178,16 +152,17 @@ function WindowsDialogOpen(myData, myContainerId, myIsShowGrid, myChartType, myW
         onMaximize: function () {
             TopWindow(m_WindowId);
             ChangeSize(m_WindowId);
-            CreateGridChart(myData, m_WindowId, myIsShowGrid, myChartType);
+            //CreateGridChart(myData, m_WindowId, myIsShowGrid, myChartType);
 
         },
         onRestore: function () {
             //TopWindow(m_WindowId);
             ChangeSize(m_WindowId);
-            CreateGridChart(myData, m_WindowId, myIsShowGrid, myChartType);
+            //CreateGridChart(myData, m_WindowId, myIsShowGrid, myChartType);
         }
     });
 }
+
 //将chart转化为图片
 function chartToImage(){
     var j = $('#' + windowID + '_Chart').jqplotToImageElem();
