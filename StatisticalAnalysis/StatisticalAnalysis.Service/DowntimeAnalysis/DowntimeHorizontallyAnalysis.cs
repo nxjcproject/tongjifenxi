@@ -75,7 +75,7 @@ namespace StatisticalAnalysis.Service.DowntimeAnalysis
                 return null;
             }
         }
-        public static DataTable GetHaltReasonStatics(string myStartTime, string myEndTime, string myEquipmentCommonId, string myStaticsMethod, string myStaticsRange, string  myHaltTypeId, string myReasonTypeId, List<string> myValidOrganizationIds)
+        public static DataTable GetHaltReasonStatics(string myStartTime, string myEndTime, string myEquipmentCommonId, string myStaticsMethod, string myStaticsRange, string myHaltTypeId, string myReasonTypeId, List<string> myValidOrganizationIds)
         {
             string m_OrganizationIds = "";
             string m_Sql = @"Select Z.Name {7} as Name, X.LevelCode as Id, X.Value from
@@ -95,9 +95,8 @@ namespace StatisticalAnalysis.Service.DowntimeAnalysis
                                              (case when C.RecoverTime is null or C.RecoverTime > '{1} 23:59:59' then '{1} 23:59:59'
                                               when  C.RecoverTime < '{0} 00:00:00' then '{0} 00:00:00'
                                               else C.RecoverTime end))) / 3600.00 as HaltLongF    
-								    from shift_MachineHaltLog C
-										   left join system_MachineHaltReason F on C.ReasonID = F.MachineHaltReasonID, 
-										   system_Organization D, system_Organization E, equipment_EquipmentDetail G, system_Organization J, system_Organization K
+								    from shift_MachineHaltLog C, system_Organization D, system_Organization E, equipment_EquipmentDetail G, system_Organization J, system_Organization K
+                                        {10}
 										where ((C.HaltTime >= '{0} 00:00:00' and C.HaltTime <= '{1} 23:59:59')
 						                        or (C.RecoverTime >= '{0} 00:00:00' and C.RecoverTime <= '{1} 23:59:59')
                                                 or (C.HaltTime < '{0} 00:00:00' and C.RecoverTime > '{1} 23:59:59')
@@ -114,8 +113,8 @@ namespace StatisticalAnalysis.Service.DowntimeAnalysis
                                         {5}) M
 									group by {4}) X
 									{6}
-									,system_Organization Z {10}
-									and X.LevelCode = Z.LevelCode
+									,system_Organization Z
+									where X.LevelCode = Z.LevelCode
 									order by X.Value desc, X.LevelCode";
             try
             {
@@ -137,28 +136,30 @@ namespace StatisticalAnalysis.Service.DowntimeAnalysis
                     string m_DisplayColumn = string.Format("substring(M.LevelCode,1,{0}) as LevelCode", myStaticsRange);
                     string m_EquipmentCondition = "";
                     string m_DisplayEquimentName = "";
-                    if (myStaticsRange == "7") 
+                    if (myStaticsRange == "7")
                     {
                         m_GroupByCondition = m_GroupByCondition + ", M.EquipmentID";
                         m_DisplayColumn = m_DisplayColumn + ", M.EquipmentID";
-                        m_EquipmentCondition = "left join equipment_EquipmentDetail Z on Z.EquipmentID = X.EquipmentID";
-                        m_DisplayEquimentName = " + (case when Z.EquipmentName is null then '未知设备' else Z.EquipmentName end)";
+                        m_EquipmentCondition = "left join equipment_EquipmentDetail N on N.EquipmentID = X.EquipmentID";
+                        m_DisplayEquimentName = " + (case when N.EquipmentName is null then '未知设备' else N.EquipmentName end)";
                     }
                     ///////当选择具体原因类别的时候/////
                     string m_ReasonStatisticsType = "";
                     string m_ResaonId = "";
                     if (myHaltTypeId == "null")
                     {
-                        m_ReasonStatisticsType = "where X.LevelCode = X.LevelCode";
+                        m_ReasonStatisticsType = ", (select 'NULLReason' as ReasonStatisticsTypeId) F";
                         m_ResaonId = " and (C.ReasonID = '' or C.ReasonID is null)  ";
                     }
                     else if (myReasonTypeId == "All")
                     {
-                        m_ReasonStatisticsType = string.Format(", system_MachineHaltReasonStatisticsType Y  where X.ReasonStatisticsTypeId = Y.ReasonStatisticsTypeId and Y.Type = '{0}'", myHaltTypeId);
+                        m_ReasonStatisticsType = string.Format(", (select P.MachineHaltReasonID, 'All' as ReasonStatisticsTypeId from system_MachineHaltReason P, system_MachineHaltReasonStatisticsType Q where P.ReasonStatisticsTypeId = Q.ReasonStatisticsTypeId and Q.Type = '{0}') F", myHaltTypeId);
+                        m_ResaonId = " and C.ReasonID = F.MachineHaltReasonID";
                     }
                     else
                     {
-                        m_ReasonStatisticsType = string.Format(", system_MachineHaltReasonStatisticsType Y  where X.ReasonStatisticsTypeId = Y.ReasonStatisticsTypeId and Y.ReasonStatisticsTypeId = '{0}'", myReasonTypeId);
+                        m_ReasonStatisticsType = string.Format(", (select P.MachineHaltReasonID, P.ReasonStatisticsTypeId from system_MachineHaltReason P where P.ReasonStatisticsTypeId = '{0}') F", myReasonTypeId);
+                        m_ResaonId = " and C.ReasonID = F.MachineHaltReasonID";
                     }
                     //当选择次数还是时间的时候
                     string m_DisplayStaticsMethod = "";
@@ -176,19 +177,19 @@ namespace StatisticalAnalysis.Service.DowntimeAnalysis
                     {
                         m_EquipmentId = string.Format(" and G.EquipmentCommonId = '{0}' ", myEquipmentCommonId);
                     }
-                    m_Sql = m_Sql.Replace("{0}",myStartTime);
-                    m_Sql = m_Sql.Replace("{1}",myEndTime);
-                    m_Sql = m_Sql.Replace("{2}",m_OrganizationIds);
-                    m_Sql = m_Sql.Replace("{3}",m_DisplayColumn);
-                    m_Sql = m_Sql.Replace("{4}",m_GroupByCondition);
+                    m_Sql = m_Sql.Replace("{0}", myStartTime);
+                    m_Sql = m_Sql.Replace("{1}", myEndTime);
+                    m_Sql = m_Sql.Replace("{2}", m_OrganizationIds);
+                    m_Sql = m_Sql.Replace("{3}", m_DisplayColumn);
+                    m_Sql = m_Sql.Replace("{4}", m_GroupByCondition);
                     m_Sql = m_Sql.Replace("{5}", m_ResaonId);
-                    m_Sql = m_Sql.Replace("{6}",m_EquipmentCondition);
-                    m_Sql = m_Sql.Replace("{7}",m_DisplayEquimentName);
-                    m_Sql = m_Sql.Replace("{8}",m_DisplayStaticsMethod);
+                    m_Sql = m_Sql.Replace("{6}", m_EquipmentCondition);
+                    m_Sql = m_Sql.Replace("{7}", m_DisplayEquimentName);
+                    m_Sql = m_Sql.Replace("{8}", m_DisplayStaticsMethod);
                     m_Sql = m_Sql.Replace("{9}", m_EquipmentId);
                     m_Sql = m_Sql.Replace("{10}", m_ReasonStatisticsType);
                     DataTable m_ResultTable = _dataFactory.Query(m_Sql);
-                    if(m_ResultTable != null)
+                    if (m_ResultTable != null)
                     {
                         GetHaltScale(ref m_ResultTable);
                     }

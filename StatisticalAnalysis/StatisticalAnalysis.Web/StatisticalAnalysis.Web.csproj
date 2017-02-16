@@ -1836,16 +1836,16 @@
     <Content Include="lib\pllib\syntaxhighlighter\MIT-LICENSE" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StatisticalAnalysis.Service\StatisticalAnalysis.Service.csproj">
-      <Project>{ca1cb008-2b96-4732-a14a-a53afe3bd480}</Project>
-      <Name>StatisticalAnalysis.Service</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Properties\PublishProfiles\Release_LenovoPC.pubxml" />
     <None Include="Properties\PublishProfiles\StatisticalAnalysis.pubxml" />
     <None Include="Properties\PublishProfiles\test.pubxml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StatisticalAnalysis.Service\StatisticalAnalysis.Service.csproj">
+      <Project>{ca1cb008-2b96-4732-a14a-a53afe3bd480}</Project>
+      <Name>StatisticalAnalysis.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
