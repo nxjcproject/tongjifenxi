@@ -30,21 +30,16 @@ namespace StatisticalAnalysis.Service.DowntimeAnalysis
 		                                  SELECT [B].[OrganizationID]
 		                                    FROM [system_Organization] AS [A], [system_Organization] AS [B] 
 		                                   WHERE [A].[OrganizationID] = @organizationId 
-                                             AND [B].[LevelCode] LIKE [A].[LevelCode] + '%'
-                                         )
+                                             AND [B].[LevelCode] LIKE [A].[LevelCode] + '%')
                                       AND [C].[HaltTime] >= @startTime
-                                      AND [C].[HaltTime] <= @endTime
-                                ";
-
+                                      AND [C].[HaltTime] <= @endTime";
             SqlParameter[] parameters = new SqlParameter[]{
                 new SqlParameter("organizationId", organiztionId),
                 new SqlParameter("startTime", startTime),
                 new SqlParameter("endTime", endTime)
             };
-
             return dataFactory.Query(queryString, parameters);
         }
-
         /// <summary>
         /// 按照组织机构ID（分厂级及以上）获取按组织机构统计的停机次数
         /// </summary>
@@ -55,41 +50,34 @@ namespace StatisticalAnalysis.Service.DowntimeAnalysis
         public static DataTable GetDowntimeCountGroupByOrganization(string organizationId, DateTime startTime, DateTime endTime)
         {
             DataTable downtimeLogs = GetDowntimeLogByOrganiztionId(organizationId, startTime, endTime);
-
             var organizations = from r in downtimeLogs.AsEnumerable()
                                 select new
                                 {
                                     OrganizationID = r.Field<string>("OrganizationID"),
                                     Name = r.Field<string>("ProductionLineName")
                                 };
-
             var downtimeCounts = from r in downtimeLogs.AsEnumerable()
-                              group r by r.Field<string>("OrganizationID")
-                                  into g
-                                  select new
+                                 group r by r.Field<string>("OrganizationID")
+                                 into g
+                                 select new
                                   {
                                       OrganizationID = g.Key,
                                       DowntimeCount = g.Count()
                                   };
-
             DataTable result = new DataTable();
             result.Columns.Add("OrganizationID", typeof(string));
             result.Columns.Add("Name", typeof(string));
             result.Columns.Add("Count", typeof(int));
-
             foreach (var downtimeCount in downtimeCounts)
             {
                 DataRow dr = result.NewRow();
                 dr["OrganizationID"] = downtimeCount.OrganizationID;
                 dr["Name"] = organizations.FirstOrDefault(o => o.OrganizationID == downtimeCount.OrganizationID).Name;
                 dr["Count"] = downtimeCount.DowntimeCount;
-
                 result.Rows.Add(dr);
             }
-
             return result;
         }
-
         /// <summary>
         /// 按照组织机构ID（分厂级及以上）获取按停机原因分类的停机次数
         /// </summary>

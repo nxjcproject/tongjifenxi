@@ -96,7 +96,7 @@
                         <legend>合计</legend>
                         <table class="table" style="width:100%;">
                             <tr>
-                                <th class="countPanelItemsCol">总停机次数：</th>
+                                <th class="countPanelItemsCol" style="width:60%;">总停机次数：</th>
                                 <td><span id="countTotal">0</span> 次</td>
                             </tr>
                         </table>

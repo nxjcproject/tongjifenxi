@@ -186,7 +186,7 @@ function updateCountPanel(data) {
 
         // 否则，生成表格元素
 
-        str += '<tr><th class="countPanelItemsCol">' + data.rows[i].Name + '：</th><td>' + data.rows[i].Count + ' 次</td></tr>';
+        str += '<tr><th class="countPanelItemsCol" style="width:60%;">' + data.rows[i].Name + '：</th><td>' + data.rows[i].Count + ' 次</td></tr>';
     }
 
     // 如果返回记录为空，则生成空的提示
@@ -215,7 +215,7 @@ function updateChart(data) {
 
         // 否则，生成表格元素
 
-        str += '<tr><th class="countPanelItemsCol">' + data.rows[i].RowName + '：</th><td>' + data.rows[i].Count + ' 次</td></tr>';
+        str += '<tr><th class="countPanelItemsCol" style="width:60%;">' + data.rows[i].RowName + '：</th><td>' + data.rows[i].Count + ' 次</td></tr>';
     }
 
     // 如果返回记录为空，则生成空的提示
@@ -279,7 +279,7 @@ function WindowsDialogOpen(myContainerId, myData, myWidth, myHeight, myImageType
     var m_WindowId = OpenWindows(myContainerId, '数据分析', myWidth, myHeight); //弹出windows
     windowID = m_WindowId;
     var m_WindowObj = $('#' + m_WindowId);
-    CreateGridChart(myData, m_WindowId, true, myImageType);               //生成图表
+    CreateGridChart(myData, m_WindowId, false, myImageType);               //生成图表
     //if (myMaximized != true) {
     //    ChangeSize(m_WindowId);
     //}

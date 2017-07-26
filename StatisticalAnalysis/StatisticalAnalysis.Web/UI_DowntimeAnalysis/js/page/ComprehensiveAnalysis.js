@@ -1,11 +1,7 @@
 ﻿var IsFirstLoadChart = "true";
-
 $(document).ready(function () {
-
-
     loadDataGrid("first");
     // 为分析类型挂载change事件
-
     $("input[type=radio][name=analysisType]").change(function () {
         if ($("input[type=radio][name=analysisType]").get(2).checked === true) {
             $('#startTimeWrapper').show();
@@ -13,20 +9,15 @@ $(document).ready(function () {
         else {
             $('#startTimeWrapper').hide();
         }
-    });
-    
+    });   
     // 设定默认值
-
     var now = new Date();
     var tenDaysEarly = new Date((now / 1000 - 86400 * 10) * 1000);
     $('#StartTime').datebox('setValue', tenDaysEarly.toLocaleDateString().replace(/\//g, '-'));
     $('#EndTime').datebox('setValue', now.toLocaleDateString().replace(/\//g, '-'));
 });
-
 // 获取双击组织机构时的组织机构信息
-
 function onOrganisationTreeClick(node) {
-
     // 仅能选中分厂级别
     // 即组织机构ID的层次码 = 5
 
@@ -37,39 +28,30 @@ function onOrganisationTreeClick(node) {
 
     // 设置组织机构ID
     // organizationId为其它任何函数提供当前选中的组织机构ID
-
     $('#organizationId').val(node.OrganizationId);
-
     // 设置组织机构名称
     // 用于呈现，在界面上显示当前的组织机构名称
 
     $('#txtOrganization').textbox('setText', node.text);
 }
-
 function query() {
     // 获取组织机构ID
     var organizationId = $('#organizationId').val();
-
     if (organizationId == '') {
         $.messager.alert('提示', '请先选择需要分析的组织机构。');
         return;
-    }
-    
+    }    
     // 获取起止时间段
     var startTime = $('#StartTime').datebox('getValue');
     var endTime = $('#EndTime').datebox('getValue');
     var m_StartTimeString = "";
     var m_EndTimeString = "";
-
     // 获取分析类型
     var analysisType = $("input[name='analysisType']:checked").val();
-
     switch (analysisType) {
-
             // 如果是年分析
             // 结束时间月日应为年的最后一天
             // 起始时间月日应为年的1月1号
-
         case 'yearly':
             var array = endTime.split('-');
             endTime = new Date(array[0], array[1] - 1, array[2]);
@@ -77,13 +59,10 @@ function query() {
             endTime.setHours(23, 59, 59, 999);
             startTime = new Date(endTime.getFullYear(), 0, 1);
             startTime.setHours(00, 00, 00, 000);
-
             break;
-
             // 如果是月分析
             // 结束时间月日应为选定月的最后一天
             // 起始时间月日应为选定月的1号
-
         case 'monthly':
             var array = endTime.split('-');
             endTime = new Date(array[0], array[1] - 1, array[2]);
@@ -92,13 +71,10 @@ function query() {
             startTime = new Date();
             startTime.setFullYear(endTime.getFullYear(), endTime.getMonth(), 1);
             startTime.setHours(00, 00, 00, 000);
-
             break;
-
             // 如果是自定义，则
             // 开始时间设定为所选时间的凌晨0点0分0秒
             // 结束时间设定为所选时间的23点59分59秒
-
         case 'custom':
             var array = endTime.split('-');
             endTime = new Date(array[0], array[1] - 1, array[2]);
@@ -167,47 +143,31 @@ function loadDataGrid(type, myData) {
         $("#Windows_Report").treegrid("loadData", myData);
     }
 }
-
 function updateCountPanel(data) {
-
     // 详细计数的HTML
-
     var str = '';
-
     // 总计的数目
-
     var total = 0;
-
     // 遍历data中的元素
-
     for (var i = 0; i < data.total; i++) {
-
         // 如果是总报警数
         // 则更新total
-
         if (data.rows[i].Name == '总停机数') {
             total = data.rows[i].Count;
             continue;
         }
-
         // 否则，生成表格元素
-
-        str += '<tr><th class="countPanelItemsCol">' + data.rows[i].Name + '：</th><td>' + data.rows[i].Count + ' 次</td></tr>';
+        str += '<tr><th class="countPanelItemsCol" style="width:60%;">' + data.rows[i].Name + '：</th><td>' + data.rows[i].Count + ' 次</td></tr>';
     }
-
     // 如果返回记录为空，则生成空的提示
-
     if (data.total == 0) {
         str = '<tr><td>无停机记录</td></tr>';
         total = 0;
     }
-
     // 更新占位符
-
     $('#countByFactory').html(str);
     $('#countTotal').html(total);
 }
-
 function updateChart(data) {
 
     // 详细计数的HTML
@@ -221,7 +181,7 @@ function updateChart(data) {
 
         // 否则，生成表格元素
 
-        str += '<tr><th class="countPanelItemsCol">' + data.rows[i].RowName + '：</th><td>' + data.rows[i].Count + ' 次</td></tr>';
+        str += '<tr><th class="countPanelItemsCol" style="width:60%;">' + data.rows[i].RowName + '：</th><td>' + data.rows[i].Count + ' 次</td></tr>';
     }
 
     // 如果返回记录为空，则生成空的提示
@@ -285,7 +245,7 @@ function WindowsDialogOpen(myContainerId, myData, myWidth, myHeight, myImageType
     var m_WindowId = OpenWindows(myContainerId, '数据分析', myWidth, myHeight); //弹出windows
     windowID = m_WindowId;
     var m_WindowObj = $('#' + m_WindowId);
-    CreateGridChart(myData, m_WindowId, true, myImageType);               //生成图表
+    CreateGridChart(myData, m_WindowId, false, myImageType);               //生成图表
     //if (myMaximized != true) {
     //    ChangeSize(m_WindowId);
     //}
