@@ -114,10 +114,10 @@ namespace StatisticalAnalysis.Service.DowntimeAnalysis
                 DataRow dr = result.NewRow();
                 dr["Name"] = downtimeCount.ReasonText;
                 dr["Count"] = downtimeCount.DowntimeCount;
-
                 result.Rows.Add(dr);
             }
-
+            result.DefaultView.Sort = "Count desc";
+            result = result.DefaultView.ToTable();
             return result;
         }
         /// <summary>

@@ -126,7 +126,6 @@ function CreateGridChart(myData, myContainerId, myIsShowGrid, myChartType) {
     var m_ParentContainerWidth = m_ParentContainerObj.width() - 14;
     var m_ParentContainerHeight = m_ParentContainerObj.height() - 36;
 
-
     var m_ContainerObj = $('#' + myContainerId);
 
     var m_WindowsHtml = ''
