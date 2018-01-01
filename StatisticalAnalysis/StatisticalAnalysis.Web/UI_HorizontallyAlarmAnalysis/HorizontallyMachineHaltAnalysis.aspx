@@ -72,12 +72,12 @@
                     <div id="toolbarId" class="easyui-panel" style="height: 180px; padding: 10px">
                         <table>
                             <tr>
-                                <td>开始时间:</td>
+                                <td>开始时间</td>
                                 <td>
                                     <input id="StartTime" class="easyui-datetimebox" data-options="validType:'md[\'2012-10\']', required:true" style="width: 150px" /></td>
                             </tr>
                             <tr>
-                                <td>结束时间:</td>
+                                <td>结束时间</td>
                                 <td>
                                     <input id="EndTime" class="easyui-datetimebox" data-options="validType:'md[\'2012-10-10\']', required:true" style="width: 150px;" /></td>
                             </tr>
@@ -89,14 +89,14 @@
                             <tr>
                                 <td colspan="2">
                                     <div style="border: 1px">
-                                        全部:<input type="radio" value="0" name="Reason" />
-                                        无原因:<input type="radio" value="1" name="Reason" />
-                                        原因分类:<input type="radio" value="2" name="Reason" checked="checked" />
+                                        全部<input type="radio" value="0" name="Reason" />
+                                        无原因<input type="radio" value="1" name="Reason" />
+                                        原因分类<input type="radio" value="2" name="Reason" checked="checked" />
                                     </div>
                                 </td>
                             </tr>
                             <tr>
-                                <td>停机原因:</td>
+                                <td>停机原因</td>
                                 <td>
                                     <select id="MachineHaltReason" class="easyui-combotree" style="width: 150px" data-options="panelHeight:true"></select></td>
                             </tr>

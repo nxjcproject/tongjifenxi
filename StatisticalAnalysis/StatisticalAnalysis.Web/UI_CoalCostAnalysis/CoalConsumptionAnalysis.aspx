@@ -74,15 +74,15 @@
         <div class="easyui-panel" data-options="region:'center',border:false">
             <div class="easyui-layout" data-options="fit:true,border:false" style="margin-left:5px;">
                 <!-- 工具栏开始 -->
-                <div class="easyui-panel queryPanel" data-options="region:'north', border:true, collapsible:false, split:false" style="height: 80px;">
-                    组织机构：
+                <div class="easyui-panel queryPanel" data-options="region:'north', border:true, collapsible:false, split:false" style="height: 73px; padding-top:8px; padding-left:5px">
+                    组织机构
                     <input id="txtOrganization" class="easyui-textbox" data-options="editable:false" style="width: 100px;" />
                     <input id="organizationId" readonly="true" style="display:none;"/> | 
                     <input type="radio" id="rdoYearly" name="analysisType" value="yearly"/><label for="rdoYearly">年统计</label>  
                     <input type="radio" id="rdoMonthly" name="analysisType" value="monthly" checked="checked"/><label for="rdoMonthly">月统计</label>
                     <input type="radio" id="rdoCustom" name="analysisType" value="custom"/><label for="rdoCustom">自定义</label> | 
                     <span>
-                        起止时间：                            
+                        起止时间                           
                         <span id="startTimeWrapper" style="display:none;"><input id="StartTime" class="easyui-datebox" data-options="validType:'md[\'2012-10-10\']', required:true" style="width: 100px" />
                         <span id="InnerlLine">---</span></span>
                         <input id="EndTime" class="easyui-datebox" data-options="validType:'md[\'2012-10-10\']', required:true" style="width: 100px" />

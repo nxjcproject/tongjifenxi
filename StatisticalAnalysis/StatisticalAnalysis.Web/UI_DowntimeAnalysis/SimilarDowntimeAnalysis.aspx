@@ -77,17 +77,17 @@
                 <div class="easyui-panel queryPanel" data-options="region:'north', border:true, collapsible:false, split:false" style="height: 80px;">
                     <table>
                         <tr>
-                            <td>组织机构：</td>
+                            <td>组织机构</td>
                             <td><input id="txtOrganization" class="easyui-textbox" data-options="editable:false" style="width: 100px;" /><input id="organizationId" readonly="true" style="display:none;"/></td>
                             <td style="width:10px;">|</td>
-                            <td>统计区间：</td>
+                            <td>统计区间</td>
                             <td>
                                 <input type="radio" id="rdoYearly" name="analysisType" value="yearly"/><label for="rdoYearly">年统计</label>  
                                 <input type="radio" id="rdoMonthly" name="analysisType" value="monthly" checked="checked"/><label for="rdoMonthly">月统计</label>
                                 <input type="radio" id="rdoCustom" name="analysisType" value="custom"/><label for="rdoCustom">自定义</label>
                             </td>
                             <td style="width:10px;">|</td>
-                            <td>起止时间：</td>
+                            <td>起止时间</td>
                             <td>
                                 <span id="startTimeWrapper" style="display:none;"><input id="StartTime" class="easyui-datebox" data-options="validType:'md[\'2012-10\']', required:true" style="width: 100px" />
                                 <span id="InnerlLine">---</span></span>
@@ -98,12 +98,12 @@
                     <table>
                         <tr><td style="height:5px;"></td></tr>
                         <tr>
-                            <td>停机原因：</td>
+                            <td>停机原因</td>
                             <td>
                                 <input id="downtimeReason" class="easyui-combotree" name="downtimeReason" data-options="editable:true, required:false" style="width:200px;" />
                             </td>
                             <td style="width:10px;">|</td>
-                            <td>图表类型：</td>
+                            <td>图表类型</td>
                             <td>
                                 <select id="imageType" class="easyui-combobox" data-options="panelHeight: 'auto'" name="imageType" style="width:80px;">
                                     <option value="Line">趋势图</option>

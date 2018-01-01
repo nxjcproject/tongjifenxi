@@ -54,7 +54,7 @@
                     </td>
                     <th style="width: 80px;">选择原因类型</th>
                     <td style="width: 150px;">
-                        <select id="Select_ReasonTypeF" class="easyui-combobox" data-options="valueField: 'id', textField: 'text',panelHeight: 'auto', editable:false" name="ReasonTypeInfo" style="width: 140px;">
+                        <select id="Select_ReasonTypeF" class="easyui-combobox" data-options="valueField: 'id', textField: 'text',panelHeight: 'auto', editable:false" name="ReasonTypeInfo" style="width: 100px;">
                         </select>
                     </td>
                 </tr>

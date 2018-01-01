@@ -26,7 +26,7 @@
             <!-- 工具栏开始 -->
             <table>
                 <tr>
-                    <th style="width: 80px; height: 35px;">开始时间</th>
+                    <th style="width: 60px; height: 35px;">开始时间</th>
                     <td style="width: 110px;">
                         <input id="StartTimeF" class="easyui-datebox" data-options="validType:'md[\'2012-10\']', required:true" style="width: 100px" />
                     </td>
@@ -41,19 +41,17 @@
                             name="LevelCode" style="width: 140px;">
                         </select>
                     </td>
-                    <th style="width: 80px; height: 35px;">统计方式</th>
-                    <td style="width: 110px;">
+                    <th height: 35px;">统计方式</th>
+                    <td>
                         <select id="Select_StaticsMethodF" class="easyui-combobox" data-options="panelHeight: 'auto', editable:false" name="StaticsType" style="width: 100px;">
                             <option value="StaticsCount" selected="selected">按次数统计</option>
                             <option value="StaticsTime">按时间统计</option>
                         </select>
                     </td>
-                    <th style="width: 80px;"></th>
-                    <td></td>
                 </tr>
                 <tr>
 
-                    <th style="width: 80px;">选择设备</th>
+                    <th style="width: 60px;">选择设备</th>
                     <td style="width: 110px;">
                         <select id="Select_EquipmentCommonInfoF" class="easyui-combobox" data-options="valueField: 'id', textField: 'text',panelHeight: 'auto', editable:false" name="EquipmentCommonInfo" style="width: 100px;">
                         </select>
@@ -71,12 +69,9 @@
                         <select id="Select_ReasonTypeF" class="easyui-combobox" data-options="valueField: 'id', textField: 'text',panelHeight: 'auto', editable:false" name="ReasonTypeInfo" style="width: 140px;">
                         </select>
                     </td>
-                    <th style="width: 80px;">
+                    <th>
                         <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-chart_curve'" onclick="query();">分析</a>
                     </th>
-                    <td></td>
-                    <th style="width: 80px;"></th>
-                    <td></td>
                 </tr>
             </table>
 

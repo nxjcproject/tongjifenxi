@@ -74,11 +74,11 @@
                     <div id="toolbarId" class="easyui-panel" style="height: 100px; padding: 10px">
                         <table>
                             <tr>
-                                <td>开始时间:</td>
+                                <td>开始时间</td>
                                 <td><input id="StartTime" class="easyui-datetimebox" data-options="validType:'md[\'2012-10\']', required:true" style="width: 150px" /></td>
                             </tr>
                             <tr>
-                                <td>结束时间:</td>
+                                <td>结束时间</td>
                                 <td><input id="EndTime" class="easyui-datetimebox" data-options="validType:'md[\'2012-10-10\']', required:true" style="width: 150px;" /></td>
                             </tr>                      
                         </table>            

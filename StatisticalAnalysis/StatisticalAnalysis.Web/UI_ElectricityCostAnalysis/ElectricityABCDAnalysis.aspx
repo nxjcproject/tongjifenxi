@@ -72,23 +72,23 @@
         </div>
         <!-- 左侧组织机构目录树结束 -->
         <div class="easyui-panel" data-options="region:'center',border:false">
-            <div class="easyui-layout" data-options="fit:true,border:false" style="margin-left: 5px;">
+            <div class="easyui-layout" data-options="fit:true,border:false">
                 <!-- 工具栏开始 -->
-                <div class="easyui-panel queryPanel" data-options="region:'north', border:true, collapsible:false, split:false" style="height: 80px;">
+                <div class="easyui-panel queryPanel" data-options="region:'north', border:true, collapsible:false, split:false" style="height: 71px; padding-top:5px;padding-left:3px;">
                     <table>
                         <tr>
-                            <td>组织机构：</td>
+                            <td>组织机构</td>
                             <td>
                                 <input id="txtOrganization" class="easyui-textbox" data-options="editable:false" style="width: 150px;" /><input id="organizationId" readonly="true" style="display: none;" /></td>
                             <td style="width: 10px;">|</td>
-                            <td>统计区间：</td>
+                            <td>统计区间</td>
                             <td>
                                 <input type="radio" id="rdoYearly" name="analysisType" value="yearly" /><label for="rdoYearly">年统计</label>
                                 <input type="radio" id="rdoMonthly" name="analysisType" value="monthly" checked="checked" /><label for="rdoMonthly">月统计</label>
                                 <input type="radio" id="rdoCustom" name="analysisType" value="custom" /><label for="rdoCustom">自定义</label>
                             </td>
                             <td style="width: 10px;">|</td>
-                            <td>起止时间：</td>
+                            <td>起止时间</td>
                             <td>
                                 <span id="startTimeWrapper" style="display: none;">
                                     <input id="StartTime" class="easyui-datebox" data-options="validType:'md[\'2012-10\']', required:true" style="width: 100px" />
@@ -100,14 +100,14 @@
                             <td style="height: 5px;"></td>
                         </tr>
                         <tr>
-                            <td>电耗类型：</td>
+                            <td>电耗类型</td>
                             <td>
                                 <select id="electricityConsumptionType" class="easyui-combobox" data-options="panelHeight: 'auto'" name="imageType" style="width: 150px;">
                                     <option>请选择</option>
                                 </select>
                             </td>
                             <td style="width: 10px;">|</td>
-                            <td>图表类型：</td>
+                            <td>图表类型</td>
                             <td>
                                 <select id="imageType" class="easyui-combobox" name="imageType" data-options="panelHeight: 'auto'" style="width: 150px;">
                                     <option value="Line">趋势图</option>

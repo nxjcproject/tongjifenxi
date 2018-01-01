@@ -73,14 +73,14 @@
             <div class="easyui-layout" data-options="fit:true,border:false" style="margin-left:5px;">
                 <!-- 工具栏开始 -->
                 <div class="easyui-panel queryPanel" data-options="region:'north', border:true, collapsible:false, split:false" style="height: 50px;">
-                    组织机构：
-                    <input id="txtOrganization" class="easyui-textbox" data-options="editable:false" style="width: 100px;" />
-                    <input id="organizationId" readonly="true" style="display:none;"/> |                                      
-                    项目指标：
-                    <select id="itemName" class="easyui-combobox" name="item" style="width:100px"></select>
-                    选择年份：
-                    <input id="year" class="easyui-numberspinner" style="width:80px;"required="required" data-options="editable:false"/>  
-                    <select id="imageType" class="easyui-combobox" name="imageType" style="width:100px;">
+                    组织机构
+                    <input id="txtOrganization" class="easyui-textbox" data-options="editable:false" style="width: 90px;" />
+                    <input id="organizationId" readonly="true" style="display:none;"/>                                      
+                    &nbsp 项目指标
+                    <select id="itemName" class="easyui-combobox" name="item" style="width:95px"></select>
+                    &nbsp 选择年份
+                    <input id="year" class="easyui-numberspinner" style="width:70px;"required="required" data-options="editable:false"/>  
+                    <select id="imageType" class="easyui-combobox" name="imageType" data-options="panelHeight:'auto'"  style="width:75px;">
                         <option value="Line">趋势图</option>
                         <option value="Bar">柱状图</option>
                     </select>

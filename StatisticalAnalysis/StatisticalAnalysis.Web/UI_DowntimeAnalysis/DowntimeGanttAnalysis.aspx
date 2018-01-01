@@ -39,50 +39,49 @@
                     <!-- 工具栏开始 -->
                     <table>
                         <tr>
-                            <th style="width: 80px;">选择分厂</th>
-                            <td style="width: 110px;">
+                            <th style="width: 50px;">组织机构</th>
+                            <td style="width: 100px;">
                                 <input id="OrganizationIdF" style="width: 90px; display: none;" readonly="readonly" />
                                 <input id="OrganizationNameF" class="easyui-textbox" data-options="editable:false" style="width: 100px" readonly="readonly" />
                             </td>
-                            <th style="width: 80px; height: 35px;">开始时间</th>
-                            <td style="width: 110px;">
+                            <th style="width: 75px; height: 35px;">开始时间</th>
+                            <td style="width: 100px;">
                                 <input id="StartTimeF" class="easyui-datebox" data-options="validType:'md[\'2012-10\']', required:true" style="width: 100px" />
                             </td>
-                            <th style="width: 80px;">结束时间</th>
-                            <td style="width: 110px;">
+                            <th style="width: 75px;">结束时间</th>
+                            <td style="width: 100px;">
                                 <input id="EndTimeF" class="easyui-datebox" data-options="validType:'md[\'2012-10\']', required:true" style="width: 100px" />
                             </td>
-                            <th style="width: 80px;">显示顺序</th>
-                            <td style="width: 110px;">
-                                <select id="Select_DisplayOrderF" class="easyui-combobox" data-options="valueField: 'id', textField: 'text',panelHeight: 'auto', editable:false, onSelect:function(record){SetReasonType(record.id);}" name="HaltTypeInfo" style="width: 100px;">
+                            <th>显示顺序</th>
+                            <td>
+                                <select id="Select_DisplayOrderF" class="easyui-combobox" data-options="valueField: 'id', textField: 'text',panelHeight: 'auto', editable:false, onSelect:function(record){SetReasonType(record.id);}" name="HaltTypeInfo" style="width: 90px;">
                                     <option value="time" selected="selected">停机时间</option>
                                     <option value="count">停机次数</option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
-                            <th style="width: 80px;">选择设备</th>
-                            <td style="width: 110px;">
+                            <th style="width: 50px;">选择设备</th>
+                            <td style="width: 100px;">
                                 <select id="Select_EquipmentInfoF" class="easyui-combobox" data-options="valueField: 'id', textField: 'text',panelHeight: 'auto', editable:false" name="EquipmentInfo" style="width: 100px;">
                                 </select>
                             </td>
-                            <th style="width: 80px;">选择停机类型</th>
-                            <td style="width: 110px;">
+                            <th style="width: 75px;">选择停机类型</th>
+                            <td style="width: 100px;">
                                 <select id="Select_HaltTypeF" class="easyui-combobox" data-options="valueField: 'id', textField: 'text',panelHeight: 'auto', editable:false, onSelect:function(record){SetReasonType(record.id);}" name="HaltTypeInfo" style="width: 100px;">
                                     <option value="failure" selected="selected">故障停机</option>
                                     <option value="normal">非故障停机</option>
                                     <option value="null">无原因停机</option>
                                 </select>
                             </td>
-                            <th style="width: 80px;">选择原因类型</th>
-                            <td style="width: 110px;">
+                            <th style="width: 75px;">选择原因类型</th>
+                            <td style="width: 100px;">
                                 <select id="Select_ReasonTypeF" class="easyui-combobox" data-options="valueField: 'id', textField: 'text',panelHeight: 'auto', editable:false" name="ReasonTypeInfo" style="width: 100px;">
                                 </select>
                             </td>
-                            <th style="width: 80px;">
+                            <th>
                                 <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-chart_curve'" onclick="query();">分析</a>
                             </th>
-                            <td></td>
                         </tr>
                     </table>
 
