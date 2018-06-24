@@ -40,7 +40,7 @@ namespace StatisticalAnalysis.Web.UI_HorizontallyAlarmAnalysis
         public static string GetMachineHaltReason()
         {
             DataTable table= HorizontallyMachineHaltAnalysisService.GetMachineHaltReasonInfo();
-            string json = EasyUIJsonParser.TreeJsonParser.DataTableToJsonByLevelCode(table, "MachineHaltReasonID", "ReasonText");          
+            string json = EasyUIJsonParser.TreeJsonParser.DataTableToJsonByLevelCode(table, "LevelCode", "ReasonText", "MachineHaltReasonID");          
             return json;
         }
         /// <summary>

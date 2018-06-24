@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>横向停机报警对比分析</title>
+    <title>横向对比分析</title>
     <link rel="stylesheet" type="text/css" href="/lib/ealib/themes/gray/easyui.css" />
     <link rel="stylesheet" type="text/css" href="/lib/ealib/themes/icon.css" />
     <link rel="stylesheet" type="text/css" href="/lib/extlib/themes/syExtIcon.css" />
@@ -98,7 +98,7 @@
                             <tr>
                                 <td>停机原因</td>
                                 <td>
-                                    <select id="MachineHaltReason" class="easyui-combotree" style="width: 150px" data-options="panelHeight:true"></select></td>
+                                    <select id="MachineHaltReason" class="easyui-combotree" style="width: 150px"></select></td>
                             </tr>
                             <tr>
                                 <td colspan="2">

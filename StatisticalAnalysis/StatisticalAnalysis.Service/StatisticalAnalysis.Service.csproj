@@ -33,15 +33,17 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoSetParameters">
-      <HintPath>..\..\Lib\AutoSetParameters.dll</HintPath>
+    <Reference Include="AutoMapper">
+      <HintPath>bin\Release\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="SqlServerDataAdapter, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\组件\DataAdapter\SqlServerDataAdapter\bin\Release\SqlServerDataAdapter.dll</HintPath>
+    <Reference Include="AutoSetParameters">
+      <HintPath>bin\Release\AutoSetParameters.dll</HintPath>
+    </Reference>
+    <Reference Include="SqlServerDataAdapter">
+      <HintPath>bin\Release\SqlServerDataAdapter.dll</HintPath>
     </Reference>
     <Reference Include="Standard_GB16780-2012">
-      <HintPath>..\..\Lib\Standard_GB16780-2012.dll</HintPath>
+      <HintPath>bin\Release\Standard_GB16780-2012.dll</HintPath>
     </Reference>
     <Reference Include="StatisticalReport.Infrastructure">
       <HintPath>..\Lib\StatisticalReport.Infrastructure.dll</HintPath>

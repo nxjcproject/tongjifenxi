@@ -19,17 +19,12 @@ namespace StatisticalAnalysis.Service.DowntimeAnalysis
         public static DataTable GetMachineHaltReasons()
         {
             string connectionString = ConnectionStringFactory.NXJCConnectionString;
-
             ISqlServerDataFactory factory = new SqlServerDataFactory(connectionString);
-            Query query = new Query("system_MachineHaltReason");
-
-            DataTable dt = factory.Query(query);
-            foreach (DataRow dr in dt.Rows)
-            {
-                dr["MachineHaltReasonID"] = dr["MachineHaltReasonID"].ToString().Trim();
-            }
-
-            return dt;
+            string mySql = @"SELECT  RTRIM(LTRIM(LevelCode)) AS LevelCode, ReasonText, RTRIM(LTRIM(MachineHaltReasonID)) AS MachineHaltReasonID
+                                FROM system_MachineHaltReason
+                                WHERE Enabled='true'
+                                order by LevelCode";
+            return factory.Query(mySql);
         }
 
         /// <summary>

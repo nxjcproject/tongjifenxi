@@ -38,7 +38,8 @@ namespace StatisticalAnalysis.Web.UI_DowntimeAnalysis
         public static string GetMachineHaltReasonsWithCombotreeFormat()
         {
             DataTable dt = DowntimeCountAnalysisService.GetMachineHaltReasons();
-            return TreeJsonParser.DataTableToJsonByLevelCode(dt, "MachineHaltReasonID", "ReasonText");
+            string json = TreeJsonParser.DataTableToJsonByLevelCode(dt, "LevelCode", "ReasonText", "MachineHaltReasonID");
+            return json;
         }
     }
 }

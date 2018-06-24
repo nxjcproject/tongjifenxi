@@ -143,7 +143,21 @@ function getMachineHaltReasons() {
             var downTimeReasons = jQuery.parseJSON(msg.d);
             $('#downtimeReason').combotree({
                 data: downTimeReasons,
-                required: true
+                valueField: 'MachineHaltReasonID',
+                textField: 'text',
+                editable:false,
+                required: true,
+                panelHeight: '300px',
+                onLoadSuccess: function (row, data) {
+                    $(this).tree("collapseAll");//树节点全部闭合
+                },
+                onSelect: function (node) {
+                    var isLeaf = $(this).tree('isLeaf', node.target);
+                    if (!isLeaf) {
+                        $.messager.alert('提示', '请选择具体停机原因', 'info');
+                        $('#downtimeReason').combotree('clear');
+                    }
+                }
             });
         }
     });

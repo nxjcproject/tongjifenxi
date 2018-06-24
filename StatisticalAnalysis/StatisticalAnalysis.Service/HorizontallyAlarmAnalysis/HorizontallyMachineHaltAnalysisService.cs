@@ -19,14 +19,13 @@ namespace StatisticalAnalysis.Service.HorizontallyAlarmAnalysis
         {
             string connectionString = ConnectionStringFactory.NXJCConnectionString;
             ISqlServerDataFactory dataFactory = new SqlServerDataFactory(connectionString);
-            string mySql = @"select rtrim(ltrim(a.MachineHaltReasonID)) as MachineHaltReasonID,a.ReasonText
-                                from system_MachineHaltReason a
-                                where a.Enabled='true'";
+            string mySql = @"SELECT  RTRIM(LTRIM(LevelCode)) AS LevelCode, ReasonText, RTRIM(LTRIM(MachineHaltReasonID)) AS MachineHaltReasonID
+                                FROM system_MachineHaltReason
+                                WHERE Enabled='true'
+                                order by LevelCode";
             DataTable table = dataFactory.Query(mySql);
             return table;
         }
-
-       
 
         public static DataTable GetDataService(string[] levelCodes, string startTime, string endTime, string labelLength,string type,string reason)
         {

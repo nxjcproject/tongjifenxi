@@ -35,8 +35,19 @@ function initMachineHaltReason() {
             $('#MachineHaltReason').combotree({
                 data: myData,
                 valueField: 'MachineHaltReasonID',
-                textField: 'ReasonText',
-                editable:false
+                textField: 'text',
+                editable: false,
+                panelHeight: '250px',
+                onLoadSuccess: function (row, data) {
+                    $(this).tree("collapseAll");
+                },
+                onSelect: function (node) {
+                    var isLeaf = $(this).tree('isLeaf', node.target);
+                    if (!isLeaf) {
+                        $.messager.alert('提示', '请选择具体停机原因', 'info');
+                        $('#MachineHaltReason').combotree('clear');
+                    }
+                }
             });
         }
     });
