@@ -21,7 +21,7 @@
     <!--[if lt IE 8 ]><script type="text/javascript" src="/js/common/json2.min.js"></script><![endif]-->
 
     <script type="text/javascript">
-        var companyName='';
+        var companyName = '';
         function onTagItemSelect(row) {
             if (typeof (window.parent.onTagItemSelect) == "function") {
                 var m_TagName = row.Name;
@@ -58,7 +58,7 @@
             m_TreeData = $('#organisationTree').tree('getParent', m_node.target);
 
             var m_id;
-            while (m_TreeData!= null && m_TreeData!= undefined && m_TreeData != NaN) {
+            while (m_TreeData != null && m_TreeData != undefined && m_TreeData != NaN) {
                 //m_TagName = m_TreeData.Name + '>>' + m_TagName;
                 //if (m_TreeData.LevelType == 'Company' || m_TreeData.LevelType == 'ProductionLine' || m_TreeData.LevelType == 'MainMachine') {
                 //    m_TagName = m_TreeData.Name + '>>' + m_TagName;
@@ -77,8 +77,9 @@
         // 所有公式组
         function loadProcess() {
             var organizationId = $('#organizationId').val();
+            var mEndTime = document.getElementById("<% = HiddenField_endTime.ClientID %>").value;
             var queryUrl = 'ProcessSelector.aspx/GetProcessWithTreeGridFormat';
-            var dataToSend = '{organizationId: "' + organizationId + '"}';
+            var dataToSend = '{organizationId: "' + organizationId + '", mEndTime: "' + mEndTime + '"}';
             var win = $.messager.progress({
                 title: '请稍后',
                 msg: '数据载入中...'
@@ -94,8 +95,8 @@
                     initializeProcessTable(jQuery.parseJSON(msg.d));
                 },
                 beforeSend: function (XMLHttpRequest) {
-                win;
-            }
+                    win;
+                }
             });
         }
 
@@ -108,27 +109,27 @@
     </script>
 </head>
 
-<body class="easyui-layout" data-options="fit:true,border:false">
-    <!-- 左侧组织机构目录树开始 -->
-    <div data-options="region:'west',border:false" style="width: 150px;">
-        <uc1:OrganisationTree_ProductionLine runat="server" ID="OrganisationTree_ProductionLine" />
-    </div>
-    <!-- 左侧组织机构目录树结束 -->
-    <div data-options="region:'center',border:false">
-        <div class="easyui-layout" data-options="fit:true,border:false" style="margin-left: 5px;">
-            <!-- 工具栏开始 -->
-            <div class="queryPanel" data-options="region:'north', border:true, collapsible:false, split:false" style="height: 50px;">
-                组织机构：
+<body>
+    <div class="easyui-layout" data-options="fit:true,border:false">
+        <!-- 左侧组织机构目录树开始 -->
+        <div data-options="region:'west',border:false" style="width: 150px;">
+            <uc1:OrganisationTree_ProductionLine runat="server" ID="OrganisationTree_ProductionLine" />
+        </div>
+        <!-- 左侧组织机构目录树结束 -->
+        <div data-options="region:'center',border:false">
+            <div class="easyui-layout" data-options="fit:true,border:false" style="margin-left: 5px;">
+                <!-- 工具栏开始 -->
+                <div class="queryPanel" data-options="region:'north', border:true, collapsible:false, split:false" style="height: 50px;">
+                组织机构             
                 <input id="txtOrganization" class="easyui-textbox" data-options="editable:false" style="width: 100px;" />
-                <input id="organizationId" readonly="true" style="display: none;" />
-                | 
-                <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="query();">搜索</a>
-            </div>
-            <!-- 工具栏结束 -->
-            <div data-options="region:'center', border:true, collapsible:false, split:false" style="height: 50px; padding: 0px;">
-                <!-- 工序表格开始 -->
-                <table id="processTable" class="easyui-treegrid"
-                    data-options="
+                    <input id="organizationId" readonly="true" style="display: none;" />
+                    <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="query();">查询</a>
+                </div>
+                <!-- 工具栏结束 -->
+                <div data-options="region:'center', border:true, collapsible:false, split:false" style="height: 50px; padding: 0px;">
+                    <!-- 工序表格开始 -->
+                    <table id="processTable" class="easyui-treegrid"
+                        data-options="
 				            iconCls: 'icon-edit',
 				            rownumbers: true,
 				            animate: true,
@@ -137,18 +138,22 @@
 				            idField: 'LevelCode',
 				            treeField: 'Name',
                             fit: true,
-                            onDblClickRow: onTagItemSelect
-			            ">
-                    <thead>
-                        <tr>
-                            <th data-options="field:'LevelCode',hidden:true">层次码</th>
-                            <th data-options="field:'Name',width:100,editor:'text'">工序名称</th>
-                        </tr>
-                    </thead>
-                </table>
-                <!-- 工序表格结束 -->
+                            onDblClickRow: onTagItemSelect">
+                        <thead>
+                            <tr>
+                                <th data-options="field:'LevelCode',hidden:true">层次码</th>
+                                <th data-options="field:'Name',width:100,editor:'text'">工序名称</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <!-- 工序表格结束 -->
+                </div>
             </div>
         </div>
     </div>
+
+    <form id="formMain" runat="server">
+        <asp:HiddenField ID="HiddenField_endTime" runat="server" />
+    </form>
 </body>
 </html>

@@ -99,7 +99,7 @@
                                         <div class="datagrid-btn-separator"></div>
                                     </td>
                                     <td>
-                                        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="queryHistoryTrend();">查询</a>
+                                        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="queryHistoryTrend();">查询</a>
                                     </td>
                                 </tr>
                                 <tr>

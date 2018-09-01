@@ -103,9 +103,10 @@ function queryHistoryTrend() {
 // 弹出标签选择窗口
 
 function popupTagSelector() {
+    var endTime = $('#EndTime').datetimebox('getValue');
     $('#dlg_SelectProcessTags').dialog('open');
     if ($('#tagSelector').attr('src') == 'about:blank')
-        $('#tagSelector').attr('src', 'ProcessSelector.aspx?PageId=5CE25714-15AE-490B-947E-13C28BA20316');
+        $('#tagSelector').attr('src', 'ProcessSelector.aspx?PageId=5CE25714-15AE-490B-947E-13C28BA20316&endTime=' + endTime);
 }
 
 // 添加标签
