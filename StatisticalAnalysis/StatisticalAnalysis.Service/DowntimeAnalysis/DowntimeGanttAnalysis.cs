@@ -143,8 +143,7 @@ namespace StatisticalAnalysis.Service.DowntimeAnalysis
         }
         public static DataTable GetMachineHaltReason()
         {
-            string m_Sql = @"SELECT ltrim(rtrim(A.ReasonItemID)) as ReasonItemID
-                                  ,A.MachineHaltReasonID
+            string m_Sql = @"SELECT A.MachineHaltReasonID
                                   ,A.ReasonText
                                   ,A.Remarks
                                   ,A.ReasonStatisticsTypeId
